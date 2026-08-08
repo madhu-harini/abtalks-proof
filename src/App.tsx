@@ -1,7 +1,52 @@
 import { useState } from 'react'
 import './App.css'
 
-type Track = 'Software Engineering' | 'Data Science' | 'AI / ML'
+type Track =
+  | 'Software Engineering'
+  | 'Data Science'
+  | 'AI / ML'
+
+/* =========================================================
+   SHARED NAV
+========================================================= */
+
+function Navigation() {
+  return (
+    <nav>
+      <div className="brand">
+        <span>AB</span>
+        <strong>ABTalks</strong>
+      </div>
+
+      <button
+        className="menu-button"
+        aria-label="Open menu"
+        onClick={() => {
+          window.location.href = '/'
+        }}
+      >
+        ☰
+      </button>
+    </nav>
+  )
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+function Footer() {
+  return (
+    <footer>
+      <strong>ABTalks</strong>
+      <span>BUILD → PROVE → GROW</span>
+    </footer>
+  )
+}
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
 
 function LandingPage() {
   const [selectedTrack, setSelectedTrack] =
@@ -9,7 +54,10 @@ function LandingPage() {
 
   const startChallenge = () => {
     if (selectedTrack) {
-      localStorage.setItem('abtalks-track', selectedTrack)
+      localStorage.setItem(
+        'abtalks-track',
+        selectedTrack
+      )
     }
 
     window.location.href = '/dashboard'
@@ -17,19 +65,7 @@ function LandingPage() {
 
   return (
     <main>
-      <nav className="navbar">
-        <div className="logo">
-          <span>AB</span>
-          <strong>ABTalks</strong>
-        </div>
-
-        <button
-          className="menu-button"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HERO */}
       <section className="hero">
@@ -128,7 +164,7 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* PARTICIPANT JOURNEY */}
+      {/* ALUMNI / STUDENT JOURNEY */}
       <section className="journey-section">
         <p className="section-label">
           PEOPLE WHO BUILT BEFORE YOU
@@ -165,7 +201,9 @@ function LandingPage() {
 
             <div>
               <span>FOCUS</span>
-              <strong>PYTHON + PROBLEM SOLVING</strong>
+              <strong>
+                PYTHON + PROBLEM SOLVING
+              </strong>
             </div>
           </div>
 
@@ -342,7 +380,10 @@ function LandingPage() {
           </div>
 
           <div className="progress-bar">
-            <div className="progress-fill" />
+            <div
+              className="progress-fill"
+              style={{ width: '20%' }}
+            />
           </div>
 
           <div className="streak">
@@ -416,17 +457,14 @@ function LandingPage() {
         </button>
       </section>
 
-      <footer>
-        <strong>ABTalks</strong>
-        <span>BUILD → PROVE → GROW</span>
-      </footer>
+      <Footer />
     </main>
   )
 }
 
-/* =========================
+/* =========================================================
    DASHBOARD
-========================= */
+========================================================= */
 
 function DashboardPage() {
   const savedTrack =
@@ -445,44 +483,36 @@ function DashboardPage() {
     {
       icon: '🔥',
       title: 'First Week',
-      description: '7-day streak',
-      unlocked: true,
+      description: 'Complete 7 days',
+      unlocked: completedDays >= 7,
     },
     {
       icon: '⚡',
       title: 'Consistency',
-      description: '10-day streak',
-      unlocked: true,
+      description: 'Complete 10 days',
+      unlocked: completedDays >= 10,
     },
     {
       icon: '🏆',
       title: 'Halfway There',
       description: 'Reach Day 30',
-      unlocked: false,
+      unlocked: completedDays >= 30,
     },
     {
       icon: '💎',
       title: 'Challenge Complete',
       description: 'Finish all 60 days',
-      unlocked: false,
+      unlocked: completedDays >= 60,
     },
   ]
 
+  const unlockedCount = badges.filter(
+    (badge) => badge.unlocked
+  ).length
+
   return (
     <main>
-      <nav className="navbar">
-        <div className="logo">
-          <span>AB</span>
-          <strong>ABTalks</strong>
-        </div>
-
-        <button
-          className="menu-button"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
-      </nav>
+      <Navigation />
 
       {/* HEADER */}
       <section className="dashboard-header">
@@ -575,7 +605,7 @@ function DashboardPage() {
         </p>
       </section>
 
-      {/* 60 DAY JOURNEY */}
+      {/* 60 DAY MAP */}
       <section className="journey-map-section">
         <p className="section-label">
           YOUR 60-DAY JOURNEY
@@ -596,7 +626,7 @@ function DashboardPage() {
           <div className="journey-map-header">
             <div>
               <strong>DAY {currentDay}</strong>
-              <span>of 60</span>
+              <span> of 60</span>
             </div>
 
             <span className="journey-map-percent">
@@ -609,9 +639,11 @@ function DashboardPage() {
               const isCompleted =
                 day <= completedDays
 
-              const isToday = day === currentDay
+              const isToday =
+                day === currentDay
 
-              const isMissed = day === 8
+              const isMissed =
+                day === 8
 
               return (
                 <button
@@ -623,6 +655,12 @@ function DashboardPage() {
                     ${day > currentDay ? 'locked' : ''}
                   `}
                   title={`Day ${day}`}
+                  onClick={() => {
+                    if (day <= currentDay) {
+                      window.location.href =
+                        `/day/${day}`
+                    }
+                  }}
                 >
                   <span>{day}</span>
                 </button>
@@ -707,7 +745,7 @@ function DashboardPage() {
           </div>
 
           <span className="badge-count">
-            2 / 4
+            {unlockedCount} / {badges.length}
           </span>
         </div>
 
@@ -716,7 +754,9 @@ function DashboardPage() {
             <div
               key={badge.title}
               className={`badge-card ${
-                badge.unlocked ? 'unlocked' : 'locked'
+                badge.unlocked
+                  ? 'unlocked'
+                  : 'locked'
               }`}
             >
               <div className="badge-icon">
@@ -727,12 +767,10 @@ function DashboardPage() {
 
               <span>{badge.description}</span>
 
-              {!badge.unlocked && (
-                <small>🔒 Locked</small>
-              )}
-
-              {badge.unlocked && (
+              {badge.unlocked ? (
                 <small>✓ Unlocked</small>
+              ) : (
+                <small>🔒 Locked</small>
               )}
             </div>
           ))}
@@ -760,7 +798,7 @@ function DashboardPage() {
         </div>
       </section>
 
-      {/* ACHIEVEMENT HIGHLIGHT */}
+      {/* LATEST ACHIEVEMENT */}
       <section className="achievement-card">
         <p className="section-label">
           LATEST ACHIEVEMENT
@@ -781,34 +819,19 @@ function DashboardPage() {
         </div>
       </section>
 
-      <footer>
-        <strong>ABTalks</strong>
-        <span>BUILD → PROVE → GROW</span>
-      </footer>
+      <Footer />
     </main>
   )
 }
 
-/* =========================
-   DAY 12
-========================= */
+/* =========================================================
+   DAY PAGE
+========================================================= */
 
 function DayPage() {
   return (
     <main>
-      <nav className="navbar">
-        <div className="logo">
-          <span>AB</span>
-          <strong>ABTalks</strong>
-        </div>
-
-        <button
-          className="menu-button"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
-      </nav>
+      <Navigation />
 
       <section className="day-hero">
         <p className="section-label">
@@ -833,6 +856,7 @@ function DayPage() {
         </div>
       </section>
 
+      {/* MISSION */}
       <section className="mission-card">
         <p className="section-label">
           TODAY'S MISSION
@@ -866,13 +890,16 @@ function DayPage() {
         </div>
       </section>
 
+      {/* BUILD / PROVE / GROW */}
       <section className="flow-section">
         <p className="section-label">
           BUILD → PROVE → GROW
         </p>
 
         <div className="flow-step active">
-          <div className="flow-number">01</div>
+          <div className="flow-number">
+            01
+          </div>
 
           <div className="flow-content">
             <span className="flow-label">
@@ -898,7 +925,9 @@ function DayPage() {
         <div className="flow-line" />
 
         <div className="flow-step">
-          <div className="flow-number">02</div>
+          <div className="flow-number">
+            02
+          </div>
 
           <div className="flow-content">
             <span className="flow-label">
@@ -943,7 +972,9 @@ function DayPage() {
         <div className="flow-line" />
 
         <div className="flow-step">
-          <div className="flow-number">03</div>
+          <div className="flow-number">
+            03
+          </div>
 
           <div className="flow-content">
             <span className="flow-label">
@@ -974,6 +1005,7 @@ function DayPage() {
         </div>
       </section>
 
+      {/* COMPLETION */}
       <section className="completion-card">
         <span className="completion-icon">
           ✦
@@ -1005,17 +1037,14 @@ function DayPage() {
         </button>
       </section>
 
-      <footer>
-        <strong>ABTalks</strong>
-        <span>BUILD → PROVE → GROW</span>
-      </footer>
+      <Footer />
     </main>
   )
 }
 
-/* =========================
+/* =========================================================
    APP ROUTING
-========================= */
+========================================================= */
 
 function App() {
   const path = window.location.pathname
