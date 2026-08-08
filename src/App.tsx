@@ -1,31 +1,39 @@
 import { useState } from 'react'
 import './App.css'
 
-type Track = 'Software Engineering' | 'Data Science' | 'AI / ML'
+type Track = 'software' | 'data' | 'ai' | ''
+
+function Nav() {
+  return (
+    <nav>
+      <div className="brand">
+        <span>AB</span>
+        <strong>ABTalks</strong>
+      </div>
+
+      <button className="menu-button" aria-label="Open menu">
+        ☰
+      </button>
+    </nav>
+  )
+}
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
 
 function LandingPage() {
-  const [selectedTrack, setSelectedTrack] = useState<Track | null>(null)
+  const [selectedTrack, setSelectedTrack] = useState<Track>('')
 
-  const startChallenge = () => {
-    if (selectedTrack) {
-      localStorage.setItem('abtalks-track', selectedTrack)
-    }
-
-    window.location.href = '/dashboard'
+  const scrollToTracks = () => {
+    document
+      .getElementById('tracks')
+      ?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <main>
-      <nav>
-        <div className="brand">
-          <span>AB</span>
-          <strong>ABTalks</strong>
-        </div>
-
-        <button className="menu-button" aria-label="Open menu">
-          ☰
-        </button>
-      </nav>
+      <Nav />
 
       {/* HERO */}
       <section className="hero">
@@ -43,16 +51,14 @@ function LandingPage() {
 
         <p className="hero-description">
           Build something every day. Ship it. Prove it.
-          Become visible.
+          Become visible through real work.
         </p>
 
         <button
           className="primary-button"
-          onClick={startChallenge}
+          onClick={scrollToTracks}
         >
-          {selectedTrack
-            ? `Start ${selectedTrack}`
-            : 'Start your 60 days'}
+          Choose your track
           <span>→</span>
         </button>
 
@@ -70,14 +76,15 @@ function LandingPage() {
         <p className="section-label">WHY ABTALKS</p>
 
         <h2>
-          Your 60 days
+          Don't just learn.
           <br />
-          <span>leave a trail.</span>
+          <span>leave proof.</span>
         </h2>
 
         <p className="trust-description">
-          This isn't just about keeping a streak alive.
-          Every day gives you something real to show.
+          Every day gives you something real to build,
+          document, and share. By Day 60, your consistency
+          becomes a body of work you can actually show.
         </p>
 
         <div className="trust-list">
@@ -85,10 +92,11 @@ function LandingPage() {
             <span className="trust-icon">01</span>
 
             <div>
-              <strong>Learn & build daily</strong>
+              <strong>Real daily projects</strong>
+
               <p>
-                Turn each challenge day into something
-                you actually make.
+                Learn by building instead of collecting
+                another list of tutorials.
               </p>
             </div>
           </div>
@@ -97,10 +105,11 @@ function LandingPage() {
             <span className="trust-icon">02</span>
 
             <div>
-              <strong>Prove your work</strong>
+              <strong>Public proof of work</strong>
+
               <p>
-                Keep your GitHub and LinkedIn proof
-                connected to your journey.
+                Your GitHub commits and LinkedIn posts
+                show that you're actually building.
               </p>
             </div>
           </div>
@@ -109,113 +118,96 @@ function LandingPage() {
             <span className="trust-icon">03</span>
 
             <div>
-              <strong>Grow your body of work</strong>
+              <strong>A portfolio that grows daily</strong>
+
               <p>
-                Finish with 60 days of visible progress
-                instead of an empty streak.
+                Your challenge isn't just a streak.
+                It's a record of what you learned and shipped.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PARTICIPANT JOURNEY */}
+      {/* STUDENT JOURNEY */}
       <section className="journey-section">
-        <p className="section-label">
-          PEOPLE WHO BUILT BEFORE YOU
-        </p>
+        <p className="section-label">A STUDENT JOURNEY</p>
 
         <h2>
-          Real journeys.
+          See what
           <br />
-          <span>Real proof.</span>
+          <span>60 days can build.</span>
         </h2>
 
         <p className="journey-intro">
-          Students are already showing up, building,
-          and sharing their progress.
+          From showing up on Day 01 to building a visible
+          body of work by Day 60.
         </p>
 
         <div className="journey-card">
           <div className="journey-card-top">
-            <div className="journey-avatar">
-              SY
-            </div>
+            <div className="journey-avatar">AS</div>
 
             <div>
-              <strong>Shubham Yadav</strong>
-              <span>ABTalks participant</span>
+              <strong>Arjun Sharma</strong>
+              <span>
+                Software Engineering • Completed
+              </span>
             </div>
           </div>
 
           <div className="journey-progress">
             <div>
-              <span>JOURNEY</span>
-              <strong>DAY 01 → DAY 06+</strong>
+              <span>CHALLENGE</span>
+              <strong>60 / 60 days</strong>
             </div>
 
             <div>
-              <span>FOCUS</span>
-              <strong>PYTHON + PROBLEM SOLVING</strong>
+              <span>BUILDS</span>
+              <strong>47 projects</strong>
             </div>
           </div>
 
           <p className="journey-quote">
-            Small steps like these are helping me build
-            a strong foundation in problem-solving.
+            “I stopped waiting to feel ready and started
+            shipping something every day.”
           </p>
 
           <div className="journey-proof">
-            <span>✓ Daily build</span>
             <span>✓ GitHub proof</span>
-            <span>✓ LinkedIn progress</span>
+            <span>✓ LinkedIn proof</span>
+            <span>✓ 60 day streak</span>
           </div>
 
-          <button
-            className="secondary-button"
-            onClick={() =>
-              window.open(
-                'https://www.linkedin.com/in/shubham-yadav-54433524a/',
-                '_blank'
-              )
-            }
-          >
-            View public journey
-            <span>↗</span>
-          </button>
+          <div className="journey-footer">
+            Day 01 → Day 60
+          </div>
         </div>
-
-        <p className="journey-footer">
-          Every journey starts with Day 1.
-        </p>
       </section>
 
-      {/* TRACK SELECTION */}
-      <section className="track-section">
+      {/* TRACKS */}
+      <section className="track-section" id="tracks">
         <p className="section-label">CHOOSE YOUR PATH</p>
 
         <h2>
-          What do you want
+          Pick a track.
           <br />
-          <span>to build toward?</span>
+          <span>Start building.</span>
         </h2>
 
         <p className="track-intro">
-          Pick a track and make the next 60 days
-          count toward something you want to become
-          good at.
+          Choose the area you want to grow in. Your daily
+          missions will follow your selected track.
         </p>
 
         <div className="track-list">
           <button
             className={`track-card ${
-              selectedTrack === 'Software Engineering'
+              selectedTrack === 'software'
                 ? 'selected'
                 : ''
             }`}
-            onClick={() =>
-              setSelectedTrack('Software Engineering')
-            }
+            onClick={() => setSelectedTrack('software')}
           >
             <div className="track-icon">⌘</div>
 
@@ -223,7 +215,7 @@ function LandingPage() {
               <strong>Software Engineering</strong>
 
               <span>
-                Build products, systems and web apps.
+                Build websites, apps, APIs and real products.
               </span>
             </div>
 
@@ -232,11 +224,11 @@ function LandingPage() {
 
           <button
             className={`track-card ${
-              selectedTrack === 'Data Science'
+              selectedTrack === 'data'
                 ? 'selected'
                 : ''
             }`}
-            onClick={() => setSelectedTrack('Data Science')}
+            onClick={() => setSelectedTrack('data')}
           >
             <div className="track-icon">◫</div>
 
@@ -244,7 +236,8 @@ function LandingPage() {
               <strong>Data Science</strong>
 
               <span>
-                Turn data into useful insights.
+                Work with data, analysis, visualisation
+                and insights.
               </span>
             </div>
 
@@ -253,19 +246,20 @@ function LandingPage() {
 
           <button
             className={`track-card ${
-              selectedTrack === 'AI / ML'
+              selectedTrack === 'ai'
                 ? 'selected'
                 : ''
             }`}
-            onClick={() => setSelectedTrack('AI / ML')}
+            onClick={() => setSelectedTrack('ai')}
           >
             <div className="track-icon">✦</div>
 
             <div className="track-content">
-              <strong>AI / ML</strong>
+              <strong>AI / Machine Learning</strong>
 
               <span>
-                Build intelligent systems and experiences.
+                Build intelligent systems and practical
+                AI projects.
               </span>
             </div>
 
@@ -274,69 +268,59 @@ function LandingPage() {
         </div>
 
         {selectedTrack && (
-          <div className="track-selected-message">
-            <span>✓</span>
-            <div>
-              <strong>{selectedTrack}</strong>
-              <p>Your 60-day journey starts here.</p>
-            </div>
-          </div>
-        )}
+          <>
+            <div className="track-selected-message">
+              <span>✓</span>
 
-        <button
-          className="primary-button track-start-button"
-          onClick={startChallenge}
-          disabled={!selectedTrack}
-        >
-          {selectedTrack
-            ? `Start ${selectedTrack}`
-            : 'Select a track first'}
-          <span>→</span>
-        </button>
+              <div>
+                <strong>
+                  {selectedTrack === 'software'
+                    ? 'Software Engineering selected'
+                    : selectedTrack === 'data'
+                    ? 'Data Science selected'
+                    : 'AI / Machine Learning selected'}
+                </strong>
+
+                <p>
+                  Your 60-day journey starts with your
+                  first build.
+                </p>
+              </div>
+            </div>
+
+            <button
+              className="primary-button track-start-button"
+              onClick={() => {
+                window.location.href = '/dashboard'
+              }}
+            >
+              Start my 60 days
+              <span>→</span>
+            </button>
+          </>
+        )}
       </section>
 
-      {/* PROOF */}
-      <section className="proof-section">
-        <p className="section-label">THE IDEA</p>
+      {/* DAILY LOOP */}
+      <section className="how-section">
+        <p className="section-label">THE DAILY LOOP</p>
 
         <h2>
-          Your work,
+          BUILD.
           <br />
-          <span>not just a streak.</span>
+          <span>PROVE. GROW.</span>
         </h2>
-
-        <p>
-          Every day you ship becomes another piece of
-          proof in your developer journey.
-        </p>
-
-        <div className="progress-card">
-          <div className="progress-top">
-            <span>DAY 12 / 60</span>
-            <span>20%</span>
-          </div>
-
-          <div className="progress-bar">
-            <div className="progress-fill" />
-          </div>
-
-          <div className="streak">
-            <span>🔥</span>
-            <strong>12 day streak</strong>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section className="how-section">
-        <p className="section-label">HOW IT WORKS</p>
 
         <div className="step">
           <span className="step-number">01</span>
 
           <div>
             <h3>BUILD</h3>
-            <p>Complete today's coding mission.</p>
+
+            <p>
+              Complete today's coding mission and ship
+              something real.
+            </p>
           </div>
         </div>
 
@@ -345,7 +329,11 @@ function LandingPage() {
 
           <div>
             <h3>PROVE</h3>
-            <p>Submit your GitHub and LinkedIn proof.</p>
+
+            <p>
+              Submit your GitHub commit and share your
+              progress on LinkedIn.
+            </p>
           </div>
         </div>
 
@@ -354,12 +342,16 @@ function LandingPage() {
 
           <div>
             <h3>GROW</h3>
-            <p>Watch your developer journey take shape.</p>
+
+            <p>
+              Turn 60 days of small actions into visible
+              developer proof.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* FINAL CTA */}
       <section className="cta-section">
         <p className="section-label">YOUR NEXT 60 DAYS</p>
 
@@ -371,48 +363,29 @@ function LandingPage() {
 
         <button
           className="primary-button"
-          onClick={startChallenge}
+          onClick={scrollToTracks}
         >
-          {selectedTrack
-            ? `Start ${selectedTrack}`
-            : 'Choose your track'}
+          Choose your track
           <span>→</span>
         </button>
       </section>
 
-      <footer>
-        <strong>ABTalks</strong>
-        <span>BUILD → PROVE → GROW</span>
-      </footer>
+      <Footer />
     </main>
   )
 }
 
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
 function DashboardPage() {
-  const savedTrack =
-    localStorage.getItem('abtalks-track') ||
-    'Software Engineering'
-
   return (
-    <main className="dashboard">
-      <nav>
-        <div className="brand">
-          <span>AB</span>
-          <strong>ABTalks</strong>
-        </div>
-
-        <button
-          className="menu-button"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
-      </nav>
+    <main>
+      <Nav />
 
       <section className="dashboard-header">
-        <p className="section-label">
-          {savedTrack.toUpperCase()}
-        </p>
+        <p className="section-label">YOUR DASHBOARD</p>
 
         <h1>
           Keep
@@ -425,17 +398,26 @@ function DashboardPage() {
         </p>
       </section>
 
+      {/* STREAK */}
       <section className="streak-dashboard-card">
         <div>
-          <span className="card-label">CURRENT STREAK</span>
+          <span className="card-label">
+            CURRENT STREAK
+          </span>
+
           <strong>🔥 12 days</strong>
         </div>
 
-        <span className="streak-small">Best: 12</span>
+        <span className="streak-small">
+          Best: 12
+        </span>
       </section>
 
+      {/* TODAY */}
       <section className="today-card">
-        <p className="section-label">TODAY'S MISSION</p>
+        <p className="section-label">
+          TODAY'S MISSION
+        </p>
 
         <h2>Build a landing page</h2>
 
@@ -453,17 +435,23 @@ function DashboardPage() {
 
         <button
           className="primary-button"
-          onClick={() => (window.location.href = '/day/12')}
+          onClick={() => {
+            window.location.href = '/day/12'
+          }}
         >
           Start today's task
           <span>→</span>
         </button>
       </section>
 
+      {/* PROGRESS */}
       <section className="dashboard-progress">
         <div className="section-heading">
           <div>
-            <p className="section-label">YOUR PROGRESS</p>
+            <p className="section-label">
+              YOUR PROGRESS
+            </p>
+
             <h2>12 / 60 days</h2>
           </div>
 
@@ -483,35 +471,330 @@ function DashboardPage() {
         </p>
       </section>
 
-      <section className="achievement-card">
-        <p className="section-label">ACHIEVEMENT</p>
+      {/* STANDING */}
+      <section className="standing-card">
+        <p className="section-label">
+          YOUR STANDING
+        </p>
 
-        <div className="achievement-row">
-          <span className="achievement-icon">🔥</span>
+        <div className="standing-grid">
+          <div>
+            <strong>#128</strong>
+            <span>Challenge rank</span>
+          </div>
 
           <div>
-            <h3>12 Day Streak</h3>
+            <strong>Top 18%</strong>
+            <span>Among active builders</span>
+          </div>
+        </div>
+      </section>
 
+      {/* ACHIEVEMENTS */}
+      <section className="achievement-card">
+        <p className="section-label">
+          ACHIEVEMENTS
+        </p>
+
+        <div className="achievement-list">
+          <div className="achievement-row">
+            <span className="achievement-icon">
+              🔥
+            </span>
+
+            <div>
+              <h3>12 Day Streak</h3>
+
+              <p>
+                You've shown up consistently for 12 days.
+              </p>
+            </div>
+          </div>
+
+          <div className="achievement-row">
+            <span className="achievement-icon">
+              🚀
+            </span>
+
+            <div>
+              <h3>First 10 Builds</h3>
+
+              <p>
+                You shipped your first ten projects.
+              </p>
+            </div>
+          </div>
+
+          <div className="achievement-row locked">
+            <span className="achievement-icon">
+              🔒
+            </span>
+
+            <div>
+              <h3>30 Day Builder</h3>
+
+              <p>
+                Complete 30 days to unlock this badge.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROOF PORTFOLIO */}
+      <section className="portfolio-card">
+        <p className="section-label">
+          PROOF PORTFOLIO
+        </p>
+
+        <h2>
+          12 days.
+          <br />
+          <span>12 pieces of proof.</span>
+        </h2>
+
+        <p>
+          Your GitHub commits and LinkedIn posts are
+          becoming a visible record of your growth.
+        </p>
+
+        <button className="secondary-button">
+          View my proof →
+        </button>
+      </section>
+
+      <Footer />
+    </main>
+  )
+}
+
+/* =========================================================
+   DAY 12
+========================================================= */
+
+function ChallengeDayPage() {
+  const [github, setGithub] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+
+  return (
+    <main>
+      <Nav />
+
+      <section className="day-header">
+        <p className="section-label">
+          DAY 12 / 60
+        </p>
+
+        <div className="day-header-row">
+          <div>
+            <h1>
+              Build a
+              <br />
+              <span>landing page.</span>
+            </h1>
+          </div>
+
+          <div className="day-number">
+            12
+          </div>
+        </div>
+
+        <div className="day-meta">
+          <span>SOFTWARE ENGINEERING</span>
+          <span>•</span>
+          <span>45–60 MIN</span>
+        </div>
+      </section>
+
+      {/* MISSION */}
+      <section className="mission-section">
+        <p className="section-label">
+          TODAY'S MISSION
+        </p>
+
+        <h2>
+          Make something people
+          <br />
+          <span>want to explore.</span>
+        </h2>
+
+        <p className="mission-description">
+          Build a responsive landing page for a project,
+          product or idea. Focus on clear messaging,
+          visual hierarchy and a strong call to action.
+        </p>
+
+        <div className="mission-box">
+          <strong>What to build</strong>
+
+          <ul>
+            <li>A clear headline</li>
+            <li>A short product description</li>
+            <li>One strong call-to-action</li>
+            <li>Responsive mobile layout</li>
+            <li>Clean visual hierarchy</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ACCEPTANCE */}
+      <section className="acceptance-section">
+        <p className="section-label">
+          DONE WHEN
+        </p>
+
+        <div className="check-list">
+          <div>
+            <span>01</span>
             <p>
-              You've shown up consistently for 12 days.
+              Your page works on mobile.
+            </p>
+          </div>
+
+          <div>
+            <span>02</span>
+            <p>
+              Someone can understand your idea in 10 seconds.
+            </p>
+          </div>
+
+          <div>
+            <span>03</span>
+            <p>
+              Your project is committed to GitHub.
+            </p>
+          </div>
+
+          <div>
+            <span>04</span>
+            <p>
+              You share your build on LinkedIn.
             </p>
           </div>
         </div>
       </section>
 
-      <footer>
-        <strong>ABTalks</strong>
-        <span>BUILD → PROVE → GROW</span>
-      </footer>
+      {/* PROOF */}
+      <section className="submission-section">
+        <p className="section-label">
+          PROVE YOUR WORK
+        </p>
+
+        <h2>
+          Don't just say
+          <br />
+          <span>you built it.</span>
+        </h2>
+
+        <p className="submission-description">
+          Add both pieces of proof to complete Day 12.
+        </p>
+
+        <div className="submission-card">
+          <div className="submission-icon">
+            GH
+          </div>
+
+          <div className="submission-content">
+            <strong>GitHub repository / commit</strong>
+
+            <span>
+              Paste the link to your repository or today's commit.
+            </span>
+          </div>
+
+          <input
+            type="url"
+            placeholder="https://github.com/..."
+            value={github}
+            onChange={(event) =>
+              setGithub(event.target.value)
+            }
+          />
+        </div>
+
+        <div className="submission-card">
+          <div className="submission-icon linkedin">
+            in
+          </div>
+
+          <div className="submission-content">
+            <strong>LinkedIn post</strong>
+
+            <span>
+              Share what you built and what you learned today.
+            </span>
+          </div>
+
+          <input
+            type="url"
+            placeholder="https://linkedin.com/posts/..."
+            value={linkedin}
+            onChange={(event) =>
+              setLinkedin(event.target.value)
+            }
+          />
+        </div>
+
+        {submitted ? (
+          <div className="success-message">
+            <span>✓</span>
+
+            <div>
+              <strong>Day 12 submitted.</strong>
+
+              <p>
+                Your proof has been recorded. Keep building.
+              </p>
+            </div>
+          </div>
+        ) : (
+          <button
+            className="primary-button submit-button"
+            disabled={!github || !linkedin}
+            onClick={() => setSubmitted(true)}
+          >
+            Complete Day 12
+            <span>→</span>
+          </button>
+        )}
+      </section>
+
+      <Footer />
     </main>
   )
 }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+function Footer() {
+  return (
+    <footer>
+      <strong>ABTalks</strong>
+
+      <span>
+        BUILD → PROVE → GROW
+      </span>
+    </footer>
+  )
+}
+
+/* =========================================================
+   APP ROUTER
+========================================================= */
 
 function App() {
   const path = window.location.pathname
 
   if (path === '/dashboard') {
     return <DashboardPage />
+  }
+
+  if (path === '/day/12') {
+    return <ChallengeDayPage />
   }
 
   return <LandingPage />

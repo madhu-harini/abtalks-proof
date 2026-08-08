@@ -197,3 +197,45 @@ For each major feature:
 7. Commit the milestone to Git.
 
 The AI usage log is maintained throughout development rather than reconstructed after the project is completed.
+
+## AI Development Log — Landing Page & Dashboard
+
+### Session: Product Experience & UI Development
+
+I used AI as a design and development partner to iterate on the ABTalks student experience.
+
+#### What I worked on
+- Refined the landing page around the BUILD → PROVE → GROW concept.
+- Added a trust section to make the challenge feel more credible.
+- Added a previous-student journey/alumni-style section to show what completing the challenge could look like.
+- Added track selection for:
+  - Software Engineering
+  - Data Science
+  - AI
+- Built a student dashboard using mocked data.
+- Added current streak, today's mission, challenge progress and achievements.
+- Added navigation from the landing page → dashboard.
+- Designed the experience mobile-first around the required 390px viewport.
+- Added dark visual styling and improved the overall visual hierarchy.
+
+#### How AI was used
+AI helped me:
+- Structure the page sections and user flow.
+- Generate and refine React/TypeScript components.
+- Develop and troubleshoot CSS.
+- Think through student motivation, trust and consistency.
+- Identify missing dashboard elements such as achievements and progress.
+- Iterate on the interface based on visual feedback.
+
+#### Design decisions
+The experience is intentionally structured around:
+
+BUILD → PROVE → GROW
+
+The goal is to make the challenge feel like a developer journey rather than simply a 60-day streak counter.
+
+#### Current status
+Landing page → Track selection → Dashboard
+
+Next:
+Build the daily challenge experience at `/day/12`, including the coding mission and GitHub + LinkedIn proof submission.
