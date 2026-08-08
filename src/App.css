@@ -1,22 +1,30 @@
 /* =========================================================
-   ABTALKS — DARK MOBILE-FIRST DESIGN
+   ABTALKS — COMPLETE DARK THEME
+   Landing + Trust + Alumni + Tracks + Dashboard
+   60-Day Tracker + Achievements + Student Standing
 ========================================================= */
 
 :root {
-  --bg: #090d09;
-  --surface: #101610;
-  --surface-2: #161d15;
+  --bg: #0b0f0a;
+  --surface: #111711;
+  --surface-2: #171e16;
+  --surface-3: #1d251b;
 
-  --text-light: #f2f6ef;
-  --text: #a5afa1;
-  --muted: #717b6f;
+  --text-light: #f1f5ed;
+  --text: #a4aea0;
+  --muted: #737d70;
 
-  --border: #293129;
+  --border: #293128;
+  --border-light: #394336;
 
   --green: #b8ff3d;
-  --green-dark: #506d30;
+  --green-dark: #4d682e;
 
-  --danger: #ff6b6b;
+  --red: #ff6262;
+  --yellow: #ffd75a;
+
+  --shadow:
+    0 18px 50px rgba(0, 0, 0, 0.35);
 
   --sans:
     Inter,
@@ -29,12 +37,10 @@
   font-family: var(--sans);
 
   color: var(--text);
-
   background: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-
   -webkit-font-smoothing: antialiased;
 }
 
@@ -48,49 +54,43 @@
 }
 
 html {
-  background: var(--bg);
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
   margin: 0;
 
-  min-width: 320px;
-
   background: var(--bg);
   color: var(--text);
 }
 
-button,
-input {
-  font: inherit;
+button {
+  font-family: inherit;
 }
 
-button {
-  cursor: pointer;
+button:disabled {
+  opacity: 0.55;
 }
 
 p {
   margin: 0;
 }
 
-h1,
-h2,
-h3 {
-  margin-top: 0;
-
-  color: var(--text-light);
+a {
+  color: inherit;
+  text-decoration: none;
 }
-
-
-/* =========================================================
-   ROOT
-========================================================= */
 
 #root {
   width: 100%;
   min-height: 100svh;
 }
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 main {
   width: 100%;
@@ -109,9 +109,9 @@ main {
 ========================================================= */
 
 nav {
-  height: 66px;
+  height: 72px;
 
-  padding: 0 20px;
+  padding: 0 24px;
 
   display: flex;
   align-items: center;
@@ -119,13 +119,18 @@ nav {
 
   border-bottom: 1px solid var(--border);
 
-  background: rgba(9, 13, 9, 0.97);
+  background: rgba(11, 15, 10, 0.96);
+
+  position: relative;
+  z-index: 10;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  color: var(--text-light);
 }
 
 .brand span {
@@ -138,32 +143,44 @@ nav {
   border-radius: 8px;
 
   background: var(--green);
-  color: #090d09;
+  color: #0b0f0a;
 
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
 }
 
 .brand strong {
-  color: var(--text-light);
-
   font-size: 15px;
+  letter-spacing: -0.2px;
 }
 
 .menu-button {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
   display: grid;
   place-items: center;
 
   border: 1px solid var(--border);
-  border-radius: 9px;
+  border-radius: 10px;
 
   background: var(--surface);
   color: var(--text-light);
 
-  font-size: 17px;
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.menu-button:hover {
+  background: var(--surface-2);
+  border-color: var(--border-light);
+  transform: translateY(-1px);
 }
 
 
@@ -171,35 +188,41 @@ nav {
    TYPOGRAPHY
 ========================================================= */
 
-h1 {
-  margin-bottom: 24px;
-
-  font-size: 52px;
-  line-height: 0.92;
-
-  letter-spacing: -3px;
-
-  font-weight: 800;
+h1,
+h2,
+h3 {
+  color: var(--text-light);
 }
 
-h1 span,
+h1,
+h2 {
+  font-weight: 700;
+}
+
+h1 {
+  margin: 24px 0;
+
+  font-size: 56px;
+  line-height: 0.93;
+
+  letter-spacing: -3px;
+}
+
+h2 {
+  margin: 0 0 16px;
+
+  font-size: 34px;
+  line-height: 0.98;
+
+  letter-spacing: -1.5px;
+}
+
 h2 span {
   color: var(--green);
 }
 
-h2 {
-  margin-bottom: 16px;
-
-  font-size: 32px;
-  line-height: 0.98;
-
-  letter-spacing: -1.5px;
-
-  font-weight: 750;
-}
-
 h3 {
-  font-size: 16px;
+  margin: 0;
 }
 
 .section-label,
@@ -225,40 +248,32 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 18px;
 
   padding: 0 20px;
 
-  border: 0;
+  border: none;
   border-radius: 10px;
 
   background: var(--green);
-  color: #090d09;
+  color: #0b0f0a;
 
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 800;
+
+  cursor: pointer;
 
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
-    opacity 0.2s ease;
+    background 0.2s ease;
 }
 
 .primary-button:hover {
   transform: translateY(-2px);
 
   box-shadow:
-    0 12px 30px rgba(184, 255, 61, 0.15);
-}
-
-.primary-button:disabled {
-  opacity: 0.35;
-
-  cursor: not-allowed;
-
-  transform: none;
-
-  box-shadow: none;
+    0 10px 25px rgba(184, 255, 61, 0.15);
 }
 
 .primary-button span {
@@ -266,18 +281,36 @@ h3 {
 }
 
 .secondary-button {
-  min-height: 46px;
+  min-height: 44px;
 
-  padding: 0 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 0 15px;
 
   border: 1px solid var(--border);
   border-radius: 9px;
 
-  background: var(--surface-2);
+  background: var(--surface);
   color: var(--text-light);
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.secondary-button:hover {
+  border-color: var(--green-dark);
+  background: var(--surface-2);
+  transform: translateY(-1px);
 }
 
 
@@ -286,9 +319,9 @@ h3 {
 ========================================================= */
 
 .hero {
-  min-height: 620px;
+  min-height: 650px;
 
-  padding: 90px 20px 70px;
+  padding: 110px 24px 90px;
 
   display: flex;
   flex-direction: column;
@@ -299,11 +332,15 @@ h3 {
 
   background:
     radial-gradient(
-      circle at 85% 20%,
-      rgba(184, 255, 61, 0.09),
+      circle at 80% 20%,
+      rgba(184, 255, 61, 0.08),
       transparent 30%
     ),
     var(--bg);
+}
+
+.hero h1 {
+  max-width: 750px;
 }
 
 .hero-subtitle {
@@ -311,37 +348,31 @@ h3 {
 
   color: var(--text-light);
 
-  font-size: 19px;
-  font-weight: 650;
+  font-size: 21px;
+  font-weight: 600;
 }
 
 .hero-description {
-  max-width: 430px;
+  max-width: 440px;
 
   margin-bottom: 28px;
 
   color: var(--text);
 
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.hero .primary-button {
-  width: 100%;
-  max-width: 280px;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .challenge-meta {
   display: flex;
   flex-wrap: wrap;
-
   gap: 8px;
 
   margin-top: 20px;
 
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 11px;
 }
 
 
@@ -350,34 +381,40 @@ h3 {
 ========================================================= */
 
 .trust-section {
-  padding: 70px 20px;
+  padding: 90px 24px;
 
   border-bottom: 1px solid var(--border);
+
+  background: var(--bg);
 }
 
 .trust-description {
-  max-width: 500px;
+  max-width: 520px;
 
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 
   color: var(--text);
 
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .trust-list {
+  max-width: 680px;
+
+  display: flex;
+  flex-direction: column;
+
   border-top: 1px solid var(--border);
 }
 
 .trust-item {
   display: grid;
+  grid-template-columns: 50px 1fr;
 
-  grid-template-columns: 42px 1fr;
+  gap: 18px;
 
-  gap: 15px;
-
-  padding: 21px 0;
+  padding: 22px 0;
 
   border-bottom: 1px solid var(--border);
 }
@@ -386,8 +423,6 @@ h3 {
   color: var(--green);
 
   font-family: monospace;
-
-  font-size: 11px;
   font-weight: 800;
 }
 
@@ -398,23 +433,23 @@ h3 {
 
   color: var(--text-light);
 
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .trust-item p {
   color: var(--text);
 
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
 
 /* =========================================================
-   JOURNEY
+   ALUMNI / STUDENT JOURNEY
 ========================================================= */
 
 .journey-section {
-  padding: 70px 20px;
+  padding: 90px 24px;
 
   border-bottom: 1px solid var(--border);
 
@@ -422,40 +457,43 @@ h3 {
 }
 
 .journey-intro {
-  max-width: 500px;
+  max-width: 520px;
 
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 
   color: var(--text);
 
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
 .journey-card {
-  padding: 20px;
+  max-width: 620px;
+
+  padding: 24px;
 
   border: 1px solid var(--border);
-  border-radius: 17px;
+  border-radius: 18px;
 
   background: var(--surface-2);
 
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow);
 }
 
 .journey-card-top {
   display: flex;
   align-items: center;
 
-  gap: 13px;
+  gap: 14px;
 
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .journey-avatar {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
 
   display: grid;
   place-items: center;
@@ -463,9 +501,9 @@ h3 {
   border-radius: 50%;
 
   background: var(--green);
-  color: #090d09;
+  color: #0b0f0a;
 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -474,7 +512,7 @@ h3 {
 
   color: var(--text-light);
 
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .journey-card-top span {
@@ -484,17 +522,16 @@ h3 {
 
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .journey-progress {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
 
-  gap: 12px;
+  gap: 15px;
 
-  padding: 17px 0;
+  padding: 18px 0;
 
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -507,8 +544,8 @@ h3 {
 
   color: var(--muted);
 
-  font-size: 8px;
-  font-weight: 800;
+  font-size: 9px;
+  font-weight: 700;
 
   letter-spacing: 1px;
 }
@@ -520,11 +557,11 @@ h3 {
 }
 
 .journey-quote {
-  margin: 19px 0;
+  margin: 20px 0;
 
   color: var(--text-light);
 
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -532,11 +569,13 @@ h3 {
   display: flex;
   flex-wrap: wrap;
 
-  gap: 7px;
+  gap: 8px;
+
+  margin-bottom: 20px;
 }
 
 .journey-proof span {
-  padding: 7px 8px;
+  padding: 7px 9px;
 
   border: 1px solid var(--border);
   border-radius: 7px;
@@ -545,15 +584,16 @@ h3 {
 
   color: var(--text-light);
 
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .journey-footer {
-  margin-top: 18px;
+  margin-top: 20px;
 
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 12px;
+  font-style: italic;
 }
 
 
@@ -562,7 +602,13 @@ h3 {
 ========================================================= */
 
 .track-section {
-  padding: 70px 20px;
+  max-width: 680px;
+
+  margin: 0 auto;
+
+  padding: 90px 24px;
+
+  background: var(--bg);
 
   border-bottom: 1px solid var(--border);
 }
@@ -570,7 +616,7 @@ h3 {
 .track-intro {
   max-width: 500px;
 
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 
   color: var(--text);
 
@@ -589,23 +635,23 @@ h3 {
   width: 100%;
 
   display: grid;
-
-  grid-template-columns: 42px 1fr auto;
+  grid-template-columns: 44px 1fr auto;
 
   align-items: center;
 
-  gap: 13px;
+  gap: 14px;
 
-  padding: 15px;
+  padding: 17px;
 
   border: 1px solid var(--border);
-  border-radius: 15px;
+  border-radius: 16px;
 
   background: var(--surface);
-
   color: var(--text-light);
 
   text-align: left;
+
+  cursor: pointer;
 
   transition:
     border-color 0.2s ease,
@@ -624,49 +670,49 @@ h3 {
 .track-card.selected {
   border-color: var(--green);
 
-  background: rgba(184, 255, 61, 0.07);
+  background: rgba(184, 255, 61, 0.06);
 }
 
 .track-icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
 
   display: grid;
   place-items: center;
 
-  border-radius: 11px;
+  border-radius: 12px;
 
   background: var(--surface-2);
 
   color: var(--green);
 
-  font-size: 19px;
+  font-size: 20px;
 }
 
 .track-content {
   display: flex;
   flex-direction: column;
 
-  gap: 4px;
+  gap: 5px;
 }
 
 .track-content strong {
   color: var(--text-light);
 
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .track-content span {
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
 .track-arrow {
   color: var(--muted);
 
-  font-size: 19px;
+  font-size: 20px;
 }
 
 .track-card.selected .track-arrow {
@@ -677,22 +723,22 @@ h3 {
   display: flex;
   align-items: center;
 
-  gap: 11px;
+  gap: 12px;
 
-  margin-top: 15px;
+  margin-top: 16px;
 
-  padding: 13px;
+  padding: 14px;
 
   border: 1px solid var(--green-dark);
-  border-radius: 11px;
+  border-radius: 12px;
 
-  background: rgba(184, 255, 61, 0.05);
+  background: rgba(184, 255, 61, 0.06);
 }
 
 .track-selected-message > span {
   color: var(--green);
 
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .track-selected-message strong {
@@ -702,222 +748,85 @@ h3 {
 
   color: var(--text-light);
 
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .track-selected-message p {
   color: var(--muted);
 
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .track-start-button {
   width: 100%;
 
-  margin-top: 12px;
+  margin-top: 14px;
+}
+
+.track-start-button:disabled {
+  background: #293028;
+
+  color: #697269;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
 }
 
 
 /* =========================================================
-   BUILD PROVE GROW
+   PROOF SECTION
 ========================================================= */
 
-.how-section {
-  padding: 70px 20px;
+.proof-section {
+  padding: 90px 24px;
 
   border-bottom: 1px solid var(--border);
 
   background: var(--surface);
 }
 
-.step {
-  display: grid;
+.proof-section > p:not(.section-label) {
+  max-width: 500px;
 
-  grid-template-columns: 42px 1fr;
+  margin-bottom: 30px;
 
-  gap: 15px;
-
-  padding: 22px 0;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.step-number {
-  color: var(--green);
-
-  font-family: monospace;
-
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.step h3 {
-  margin-bottom: 5px;
-
-  color: var(--text-light);
+  color: var(--text);
 
   font-size: 15px;
+  line-height: 1.6;
 }
 
-.step p {
-  color: var(--text);
+.progress-card {
+  max-width: 600px;
 
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.cta-section {
-  padding: 90px 20px;
-
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(184, 255, 61, 0.08),
-      transparent 42%
-    ),
-    var(--surface);
-}
-
-.cta-section .primary-button {
-  width: 100%;
-  max-width: 280px;
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-.dashboard-header {
-  padding: 60px 20px 30px;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.dashboard-header h1 {
-  font-size: 43px;
-}
-
-.dashboard-header > p:last-child {
-  color: var(--text);
-
-  font-size: 13px;
-}
-
-.streak-dashboard-card,
-.today-card,
-.dashboard-progress,
-.standing-card,
-.achievement-card,
-.portfolio-card {
-  margin: 18px 20px 0;
-
-  padding: 20px;
+  padding: 22px;
 
   border: 1px solid var(--border);
   border-radius: 16px;
 
-  background: var(--surface);
+  background: var(--surface-2);
 }
 
-.streak-dashboard-card {
+.progress-top {
   display: flex;
-
-  align-items: center;
   justify-content: space-between;
-}
 
-.card-label {
-  display: block;
+  margin-bottom: 12px;
 
-  margin-bottom: 7px;
-
-  color: var(--muted);
-
-  font-size: 9px;
-  font-weight: 800;
-
-  letter-spacing: 1px;
-}
-
-.streak-dashboard-card strong {
   color: var(--text-light);
-
-  font-size: 21px;
-}
-
-.streak-small {
-  color: var(--muted);
-
-  font-size: 10px;
-}
-
-.today-card h2 {
-  font-size: 27px;
-}
-
-.today-card > p:not(.section-label) {
-  margin-bottom: 17px;
-
-  color: var(--text);
-
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.task-meta {
-  display: flex;
-
-  gap: 8px;
-
-  margin-bottom: 19px;
-
-  color: var(--muted);
 
   font-family: monospace;
 
-  font-size: 9px;
-}
-
-.today-card .primary-button {
-  width: 100%;
-}
-
-.dashboard-progress {
-  margin-top: 18px;
-}
-
-.section-heading {
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: space-between;
-
-  margin-bottom: 17px;
-}
-
-.section-heading h2 {
-  margin: 0;
-
-  font-size: 27px;
-}
-
-.section-heading > strong {
-  color: var(--green);
-
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 .progress-bar {
   width: 100%;
-  height: 7px;
+  height: 8px;
 
   overflow: hidden;
 
@@ -927,6 +836,7 @@ h3 {
 }
 
 .progress-fill {
+  width: 20%;
   height: 100%;
 
   border-radius: inherit;
@@ -934,63 +844,505 @@ h3 {
   background: var(--green);
 }
 
-.dashboard-progress > p {
-  margin-top: 12px;
+.streak {
+  display: flex;
+  align-items: center;
 
+  gap: 8px;
+
+  margin-top: 16px;
+
+  color: var(--text-light);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.how-section {
+  padding: 90px 24px;
+
+  border-bottom: 1px solid var(--border);
+
+  background: var(--bg);
+}
+
+.step {
+  max-width: 650px;
+
+  display: grid;
+  grid-template-columns: 50px 1fr;
+
+  gap: 20px;
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.step-number {
+  color: var(--green);
+
+  font-family: monospace;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+
+  color: var(--text-light);
+
+  font-size: 16px;
+}
+
+.step p {
   color: var(--text);
 
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
 
 /* =========================================================
-   STANDING
+   FINAL CTA
 ========================================================= */
 
-.standing-card {
-  margin-top: 18px;
+.cta-section {
+  padding: 110px 24px;
+
+  text-align: center;
 
   background:
-    linear-gradient(
-      135deg,
-      rgba(184, 255, 61, 0.07),
-      transparent
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(184, 255, 61, 0.08),
+      transparent 40%
     ),
     var(--surface);
 }
 
-.standing-grid {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 10px;
+.cta-section .primary-button {
+  margin-top: 10px;
 }
 
-.standing-grid > div {
-  padding: 14px;
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.dashboard-header {
+  padding: 70px 24px 40px;
+
+  border-bottom: 1px solid var(--border);
+
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(184, 255, 61, 0.07),
+      transparent 30%
+    ),
+    var(--bg);
+}
+
+.dashboard-header p:not(.section-label) {
+  max-width: 500px;
+
+  color: var(--text);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   CURRENT STREAK
+========================================================= */
+
+.streak-dashboard-card {
+  margin: 24px 24px 18px;
+
+  padding: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   border: 1px solid var(--border);
-  border-radius: 11px;
+  border-radius: 16px;
 
-  background: var(--surface-2);
+  background: var(--surface);
 }
 
-.standing-grid strong {
+.card-label {
   display: block;
 
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.streak-dashboard-card strong {
+  color: var(--text-light);
+
+  font-size: 22px;
+}
+
+.streak-small {
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   TODAY'S MISSION
+========================================================= */
+
+.today-card {
+  margin: 0 24px 18px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--surface);
+}
+
+.today-card h2 {
+  margin-bottom: 12px;
+}
+
+.today-card > p:not(.section-label) {
+  max-width: 520px;
+
+  margin-bottom: 18px;
+
+  color: var(--text);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.task-meta {
+  display: flex;
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  color: var(--muted);
+
+  font-family: monospace;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   DASHBOARD PROGRESS
+========================================================= */
+
+.dashboard-progress {
+  margin: 0 24px 18px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--surface);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0;
+}
+
+.section-heading > strong {
+  color: var(--green);
+
+  font-size: 14px;
+}
+
+.dashboard-progress .progress-fill {
+  width: 20%;
+}
+
+.dashboard-progress > p {
+  margin-top: 14px;
+
+  color: var(--text);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   60-DAY JOURNEY TRACKER
+========================================================= */
+
+.journey-tracker {
+  margin: 0 24px 18px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(184, 255, 61, 0.05),
+      transparent 30%
+    ),
+    var(--surface);
+}
+
+.journey-tracker-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.journey-tracker-header h2 {
+  margin: 0;
+}
+
+.journey-tracker-count {
+  color: var(--green);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+/* 60 DAY GRID */
+
+.day-grid {
+  display: grid;
+
+  grid-template-columns: repeat(10, 1fr);
+
+  gap: 7px;
+}
+
+.day-cell {
+  aspect-ratio: 1;
+
+  min-width: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface-2);
+
+  color: var(--muted);
+
+  font-family: monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  cursor: default;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.day-cell.completed {
+  border-color: rgba(184, 255, 61, 0.45);
+
+  background: rgba(184, 255, 61, 0.18);
+
+  color: var(--green);
+}
+
+.day-cell.today {
+  border-color: var(--green);
+
+  background: var(--green);
+
+  color: #0b0f0a;
+
+  box-shadow:
+    0 0 0 3px rgba(184, 255, 61, 0.1),
+    0 4px 15px rgba(184, 255, 61, 0.12);
+}
+
+.day-cell.missed {
+  border-color: rgba(255, 98, 98, 0.5);
+
+  background: rgba(255, 98, 98, 0.1);
+
+  color: var(--red);
+}
+
+.day-cell.upcoming {
+  opacity: 0.65;
+}
+
+.day-cell:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--green);
+}
+
+
+/* TRACKER LEGEND */
+
+.tracker-legend {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  margin-top: 18px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+
+  flex-shrink: 0;
+
+  border-radius: 3px;
+
+  background: var(--surface-2);
+
+  border: 1px solid var(--border);
+}
+
+.legend-dot.completed {
+  background: var(--green);
+
+  border-color: var(--green);
+}
+
+.legend-dot.today {
+  background: var(--green);
+
+  border-color: var(--green);
+}
+
+.legend-dot.missed {
+  background: var(--red);
+
+  border-color: var(--red);
+}
+
+
+/* =========================================================
+   STUDENT STANDING
+========================================================= */
+
+.standing-card {
+  margin: 0 24px 18px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(184, 255, 61, 0.08),
+      transparent 35%
+    ),
+    var(--surface);
+}
+
+.standing-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.standing-rank {
+  display: flex;
+  align-items: baseline;
+
+  gap: 5px;
+}
+
+.standing-rank strong {
+  color: var(--text-light);
+
+  font-size: 42px;
+  line-height: 1;
+
+  letter-spacing: -2px;
+}
+
+.standing-rank span {
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+.standing-percent {
+  padding: 8px 11px;
+
+  border: 1px solid rgba(184, 255, 61, 0.25);
+  border-radius: 8px;
+
+  background: rgba(184, 255, 61, 0.07);
 
   color: var(--green);
 
-  font-size: 18px;
+  font-size: 10px;
+  font-weight: 800;
 }
 
-.standing-grid span {
-  color: var(--muted);
+.standing-description {
+  margin-top: 15px;
 
-  font-size: 9px;
+  color: var(--text);
+
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 
@@ -998,375 +1350,253 @@ h3 {
    ACHIEVEMENTS
 ========================================================= */
 
-.achievement-card {
+.achievements-section {
+  margin: 0 24px 18px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--surface);
+}
+
+.achievements-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.achievements-header h2 {
+  margin: 0;
+}
+
+.achievements-count {
+  color: var(--muted);
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* BADGE GRID */
+
+.badges-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 10px;
+}
+
+.badge-card {
+  min-height: 135px;
+
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 1px solid var(--border);
+  border-radius: 13px;
+
+  background: var(--surface-2);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--green-dark);
+}
+
+.badge-card.unlocked {
+  border-color: rgba(184, 255, 61, 0.3);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(184, 255, 61, 0.08),
+      var(--surface-2)
+    );
+}
+
+.badge-card.locked {
+  opacity: 0.6;
+}
+
+.badge-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: rgba(184, 255, 61, 0.1);
+
+  font-size: 20px;
+}
+
+.badge-card.locked .badge-icon {
+  background: var(--surface);
+
+  filter: grayscale(1);
+
+  opacity: 0.45;
+}
+
+.badge-name {
+  margin-top: 12px;
+
+  color: var(--text-light);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.badge-description {
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+.badge-status {
+  margin-top: 10px;
+
+  color: var(--green);
+
+  font-family: monospace;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.badge-card.locked .badge-status {
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   DAILY PROOF LINKS
+========================================================= */
+
+.proof-links {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
   margin-top: 18px;
 }
 
-.achievement-list {
-  display: flex;
-  flex-direction: column;
+.proof-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 9px 11px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--surface-2);
+
+  color: var(--text-light);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.proof-link:hover {
+  border-color: var(--green);
+
+  background: var(--surface-3);
+}
+
+.proof-link span {
+  color: var(--green);
+}
+
+
+/* =========================================================
+   EXISTING ACHIEVEMENT CARD
+========================================================= */
+
+.achievement-card {
+  margin: 0 24px 70px;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  background: var(--surface);
 }
 
 .achievement-row {
   display: flex;
-
   align-items: center;
 
-  gap: 13px;
-
-  padding: 15px 0;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.achievement-row:last-child {
-  border-bottom: 0;
+  gap: 15px;
 }
 
 .achievement-icon {
-  width: 43px;
-  height: 43px;
+  width: 50px;
+  height: 50px;
 
   flex-shrink: 0;
 
   display: grid;
   place-items: center;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   background: rgba(184, 255, 61, 0.08);
 
-  font-size: 19px;
+  color: var(--green);
+
+  font-size: 24px;
 }
 
 .achievement-row h3 {
-  margin: 0 0 4px;
+  margin: 0 0 5px;
 
-  font-size: 13px;
+  color: var(--text-light);
+
+  font-size: 15px;
 }
 
 .achievement-row p {
   color: var(--text);
 
-  font-size: 10px;
-  line-height: 1.45;
-}
-
-.achievement-row.locked {
-  opacity: 0.45;
-}
-
-
-/* =========================================================
-   PROOF PORTFOLIO
-========================================================= */
-
-.portfolio-card {
-  margin-top: 18px;
-  margin-bottom: 70px;
-
-  background:
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(184, 255, 61, 0.08),
-      transparent 35%
-    ),
-    var(--surface);
-}
-
-.portfolio-card h2 {
-  font-size: 27px;
-}
-
-.portfolio-card > p:not(.section-label) {
-  margin-bottom: 18px;
-
-  color: var(--text);
-
   font-size: 12px;
-  line-height: 1.6;
-}
 
-
-/* =========================================================
-   DAY PAGE
-========================================================= */
-
-.day-header {
-  padding: 55px 20px 25px;
-
-  border-bottom: 1px solid var(--border);
-
-  background:
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(184, 255, 61, 0.08),
-      transparent 35%
-    );
-}
-
-.day-header-row {
-  display: flex;
-
-  align-items: flex-end;
-  justify-content: space-between;
-
-  gap: 15px;
-}
-
-.day-header h1 {
-  margin-bottom: 18px;
-
-  font-size: 43px;
-}
-
-.day-number {
-  color: var(--border);
-
-  font-size: 75px;
-  line-height: 0.75;
-
-  font-weight: 900;
-}
-
-.day-meta {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 7px;
-
-  color: var(--muted);
-
-  font-family: monospace;
-
-  font-size: 8px;
-}
-
-.mission-section,
-.acceptance-section,
-.submission-section {
-  padding: 55px 20px;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.mission-description {
-  margin-bottom: 25px;
-
-  color: var(--text);
-
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.mission-box {
-  padding: 18px;
-
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  background: var(--surface);
-}
-
-.mission-box strong {
-  color: var(--text-light);
-
-  font-size: 12px;
-}
-
-.mission-box ul {
-  margin: 15px 0 0;
-
-  padding-left: 18px;
-}
-
-.mission-box li {
-  margin-bottom: 9px;
-
-  color: var(--text);
-
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   ACCEPTANCE
-========================================================= */
-
-.acceptance-section {
-  background: var(--surface);
-}
-
-.check-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.check-list > div {
-  display: grid;
-
-  grid-template-columns: 35px 1fr;
-
-  gap: 12px;
-
-  padding: 16px 0;
-
-  border-bottom: 1px solid var(--border);
-}
-
-.check-list span {
-  color: var(--green);
-
-  font-family: monospace;
-
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.check-list p {
-  color: var(--text);
-
-  font-size: 12px;
   line-height: 1.5;
-}
-
-
-/* =========================================================
-   SUBMISSION
-========================================================= */
-
-.submission-description {
-  margin-bottom: 25px;
-
-  color: var(--text);
-
-  font-size: 13px;
-}
-
-.submission-card {
-  margin-bottom: 12px;
-
-  padding: 17px;
-
-  display: grid;
-
-  grid-template-columns: 38px 1fr;
-
-  gap: 12px;
-
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  background: var(--surface);
-}
-
-.submission-icon {
-  width: 38px;
-  height: 38px;
-
-  display: grid;
-  place-items: center;
-
-  border-radius: 9px;
-
-  background: #f2f6ef;
-  color: #090d09;
-
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.submission-icon.linkedin {
-  background: #0a66c2;
-  color: white;
-}
-
-.submission-content strong {
-  display: block;
-
-  margin-bottom: 4px;
-
-  color: var(--text-light);
-
-  font-size: 12px;
-}
-
-.submission-content span {
-  color: var(--muted);
-
-  font-size: 10px;
-  line-height: 1.45;
-}
-
-.submission-card input {
-  grid-column: 1 / -1;
-
-  width: 100%;
-
-  height: 43px;
-
-  padding: 0 12px;
-
-  border: 1px solid var(--border);
-  border-radius: 8px;
-
-  outline: none;
-
-  background: var(--surface-2);
-  color: var(--text-light);
-
-  font-size: 11px;
-}
-
-.submission-card input::placeholder {
-  color: var(--muted);
-}
-
-.submission-card input:focus {
-  border-color: var(--green-dark);
-}
-
-.submit-button {
-  width: 100%;
-
-  margin-top: 5px;
-}
-
-.success-message {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 15px;
-
-  border: 1px solid var(--green-dark);
-  border-radius: 12px;
-
-  background: rgba(184, 255, 61, 0.06);
-}
-
-.success-message > span {
-  color: var(--green);
-
-  font-size: 18px;
-}
-
-.success-message strong {
-  display: block;
-
-  margin-bottom: 3px;
-
-  color: var(--text-light);
-
-  font-size: 12px;
-}
-
-.success-message p {
-  color: var(--muted);
-
-  font-size: 10px;
 }
 
 
@@ -1375,20 +1605,21 @@ h3 {
 ========================================================= */
 
 footer {
-  min-height: 80px;
+  min-height: 90px;
 
-  padding: 22px 20px;
+  padding: 25px 24px;
 
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
   border-top: 1px solid var(--border);
 
+  background: var(--bg);
+
   color: var(--muted);
 
-  font-size: 9px;
+  font-size: 10px;
 
   letter-spacing: 0.5px;
 }
@@ -1399,70 +1630,21 @@ footer strong {
 
 
 /* =========================================================
-   RESPONSIVE
+   MOBILE — 600PX
 ========================================================= */
 
-@media (min-width: 700px) {
+@media (max-width: 600px) {
+
   nav {
-    padding: 0 35px;
+    height: 64px;
+
+    padding: 0 18px;
   }
 
-  .hero,
-  .trust-section,
-  .journey-section,
-  .track-section,
-  .how-section,
-  .cta-section,
-  .dashboard-header,
-  .day-header,
-  .mission-section,
-  .acceptance-section,
-  .submission-section {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  .hero {
-    min-height: 700px;
-  }
-
-  .hero h1 {
-    font-size: 76px;
-  }
-
-  .hero .primary-button {
-    width: auto;
-  }
-
-  .hero-description {
-    font-size: 16px;
-  }
-
-  .track-section {
-    max-width: 760px;
-  }
-
-  .streak-dashboard-card,
-  .today-card,
-  .dashboard-progress,
-  .standing-card,
-  .achievement-card,
-  .portfolio-card {
-    max-width: 760px;
-
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-}
-
-
-/* =========================================================
-   390PX SCREENSHOT OPTIMIZATION
-========================================================= */
-
-@media (max-width: 430px) {
   h1 {
     font-size: 43px;
+
+    letter-spacing: -2px;
   }
 
   h2 {
@@ -1470,23 +1652,232 @@ footer strong {
   }
 
   .hero {
-    padding-top: 75px;
+    min-height: auto;
+
+    padding: 80px 20px 65px;
   }
 
-  .hero .primary-button,
-  .cta-section .primary-button {
-    max-width: none;
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+  }
+
+  .hero .primary-button {
+    width: 100%;
   }
 
   .challenge-meta {
-    line-height: 1.7;
+    font-size: 10px;
+  }
+
+  .trust-section,
+  .journey-section,
+  .track-section,
+  .proof-section,
+  .how-section {
+    padding: 65px 20px;
+  }
+
+  .journey-card {
+    padding: 18px;
   }
 
   .journey-progress {
     grid-template-columns: 1fr;
+
+    gap: 15px;
   }
 
-  .standing-grid {
-    grid-template-columns: 1fr 1fr;
+  .track-section {
+    max-width: none;
+  }
+
+  .track-card {
+    grid-template-columns: 42px 1fr auto;
+
+    padding: 14px;
+  }
+
+  .track-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .track-content strong {
+    font-size: 13px;
+  }
+
+  .track-content span {
+    font-size: 11px;
+  }
+
+  .track-arrow {
+    font-size: 18px;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .streak-dashboard-card,
+  .today-card,
+  .dashboard-progress,
+  .journey-tracker,
+  .standing-card,
+  .achievements-section,
+  .achievement-card {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .dashboard-header {
+    padding: 60px 20px 30px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 42px;
+  }
+
+  .today-card {
+    padding: 20px;
+  }
+
+  .dashboard-progress {
+    padding: 20px;
+  }
+
+  .journey-tracker {
+    padding: 20px;
+  }
+
+  .day-grid {
+    grid-template-columns: repeat(10, 1fr);
+
+    gap: 5px;
+  }
+
+  .day-cell {
+    border-radius: 5px;
+
+    font-size: 8px;
+  }
+
+  .tracker-legend {
+    gap: 10px;
+  }
+
+  .standing-card {
+    padding: 20px;
+  }
+
+  .standing-rank strong {
+    font-size: 36px;
+  }
+
+  .achievements-section {
+    padding: 20px;
+  }
+
+  .badges-grid {
+    gap: 8px;
+  }
+
+  .badge-card {
+    min-height: 120px;
+
+    padding: 13px;
+  }
+
+  .badge-icon {
+    width: 36px;
+    height: 36px;
+
+    font-size: 18px;
+  }
+
+  .achievement-card {
+    padding: 20px;
+  }
+
+  footer {
+    min-height: 80px;
+
+    padding: 22px 18px;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    text-align: center;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES — 360PX
+========================================================= */
+
+@media (max-width: 360px) {
+
+  h1 {
+    font-size: 39px;
+  }
+
+  h2 {
+    font-size: 27px;
+  }
+
+  .hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .track-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .track-card {
+    grid-template-columns: 38px 1fr auto;
+
+    gap: 10px;
+  }
+
+  .track-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .journey-tracker {
+    padding: 17px;
+  }
+
+  .day-grid {
+    gap: 4px;
+  }
+
+  .day-cell {
+    font-size: 7px;
+
+    border-radius: 4px;
+  }
+
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .badge-card {
+    min-height: auto;
+  }
+
+  .standing-main {
+    align-items: flex-start;
+  }
+
+  .standing-rank strong {
+    font-size: 32px;
   }
 }
