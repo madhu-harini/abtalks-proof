@@ -1,12 +1,12 @@
 import './App.css'
 
-function App() {
+function LandingPage() {
   return (
-    <main className="landing-page">
-      <nav className="navbar">
+    <main>
+      <nav>
         <div className="brand">
-          <span className="brand-mark">AB</span>
-          <span>ABTalks</span>
+          <span>AB</span>
+          <strong>ABTalks</strong>
         </div>
 
         <button className="menu-button" aria-label="Open menu">
@@ -32,7 +32,10 @@ function App() {
           Become visible.
         </p>
 
-        <button className="primary-button">
+        <button
+          className="primary-button"
+          onClick={() => (window.location.href = '/dashboard')}
+        >
           Start your 60 days
           <span>→</span>
         </button>
@@ -114,7 +117,10 @@ function App() {
           <span>build?</span>
         </h2>
 
-        <button className="primary-button">
+        <button
+          className="primary-button"
+          onClick={() => (window.location.href = '/dashboard')}
+        >
           Start the challenge
           <span>→</span>
         </button>
@@ -126,6 +132,128 @@ function App() {
       </footer>
     </main>
   )
+}
+
+function DashboardPage() {
+  return (
+    <main className="dashboard">
+      <nav>
+        <div className="brand">
+          <span>AB</span>
+          <strong>ABTalks</strong>
+        </div>
+
+        <button
+          className="menu-button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+      </nav>
+
+      <section className="dashboard-header">
+        <p className="section-label">YOUR DASHBOARD</p>
+
+        <h1>
+          Keep
+          <br />
+          <span>building.</span>
+        </h1>
+
+        <p>
+          You're on Day 12 of your 60-day journey.
+        </p>
+      </section>
+
+      <section className="streak-dashboard-card">
+        <div>
+          <span className="card-label">CURRENT STREAK</span>
+          <strong>🔥 12 days</strong>
+        </div>
+
+        <span className="streak-small">Best: 12</span>
+      </section>
+
+      <section className="today-card">
+        <p className="section-label">TODAY'S MISSION</p>
+
+        <h2>Build a landing page</h2>
+
+        <p>
+          Create a simple landing page that explains
+          your project clearly and gives visitors a reason
+          to explore it.
+        </p>
+
+        <div className="task-meta">
+          <span>DAY 12</span>
+          <span>•</span>
+          <span>45 MIN</span>
+        </div>
+
+        <button
+          className="primary-button"
+          onClick={() => (window.location.href = '/day/12')}
+        >
+          Start today's task
+          <span>→</span>
+        </button>
+      </section>
+
+      <section className="dashboard-progress">
+        <div className="section-heading">
+          <div>
+            <p className="section-label">YOUR PROGRESS</p>
+            <h2>12 / 60 days</h2>
+          </div>
+
+          <strong>20%</strong>
+        </div>
+
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{ width: '20%' }}
+          />
+        </div>
+
+        <p>
+          12 completed days. Keep going — you're building
+          proof one day at a time.
+        </p>
+      </section>
+
+      <section className="achievement-card">
+        <p className="section-label">ACHIEVEMENT</p>
+
+        <div className="achievement-row">
+          <span className="achievement-icon">🔥</span>
+
+          <div>
+            <h3>12 Day Streak</h3>
+            <p>
+              You've shown up consistently for 12 days.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <strong>ABTalks</strong>
+        <span>BUILD → PROVE → GROW</span>
+      </footer>
+    </main>
+  )
+}
+
+function App() {
+  const path = window.location.pathname
+
+  if (path === '/dashboard') {
+    return <DashboardPage />
+  }
+
+  return <LandingPage />
 }
 
 export default App

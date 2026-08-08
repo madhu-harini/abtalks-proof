@@ -109,3 +109,339 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+
+/* ================================
+   ABTalks Dashboard
+   ================================ */
+
+.dashboard {
+  min-height: 100vh;
+  background: #0b0d0c;
+  color: #e9eee9;
+  text-align: left;
+  padding-bottom: 40px;
+}
+
+.dashboard nav {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.dashboard .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard .brand span {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #b8ff3d;
+  color: #0b0d0c;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dashboard .brand strong {
+  color: #f5f7f5;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+}
+
+.dashboard .menu-button {
+  border: 1px solid #2a302b;
+  background: #111512;
+  color: #f5f7f5;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dashboard-header {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 42px 20px 28px;
+  box-sizing: border-box;
+}
+
+.dashboard .section-label {
+  color: #8f9a91;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  margin-bottom: 12px;
+}
+
+.dashboard-header h1 {
+  color: #f5f7f5;
+  font-size: clamp(42px, 12vw, 64px);
+  line-height: 0.95;
+  letter-spacing: -2.5px;
+  margin: 0 0 20px;
+  font-weight: 700;
+}
+
+.dashboard-header h1 span {
+  color: #b8ff3d;
+}
+
+.dashboard-header > p:last-child {
+  color: #9da69f;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 330px;
+}
+
+/* Streak */
+
+.streak-dashboard-card {
+  max-width: 680px;
+  margin: 0 auto 16px;
+  padding: 22px 20px;
+  box-sizing: border-box;
+  background: #151a16;
+  border: 1px solid #293129;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.streak-dashboard-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.card-label {
+  color: #7f8b82;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.streak-dashboard-card strong {
+  color: #f5f7f5;
+  font-size: 24px;
+}
+
+.streak-small {
+  color: #8f9a91;
+  font-size: 12px;
+}
+
+/* Today's mission */
+
+.today-card {
+  max-width: 680px;
+  margin: 0 auto 16px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  background: #b8ff3d;
+  color: #0b0d0c;
+  border-radius: 20px;
+}
+
+.today-card .section-label {
+  color: #44531f;
+}
+
+.today-card h2 {
+  color: #0b0d0c;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin: 0 0 12px;
+  font-weight: 750;
+}
+
+.today-card > p:not(.section-label) {
+  color: #354025;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 480px;
+}
+
+.task-meta {
+  display: flex;
+  gap: 9px;
+  margin: 18px 0;
+  color: #4a592b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.today-card .primary-button {
+  width: 100%;
+  border: 0;
+  background: #0b0d0c;
+  color: #f5f7f5;
+  padding: 15px 17px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.today-card .primary-button span {
+  color: #b8ff3d;
+  font-size: 20px;
+}
+
+/* Progress */
+
+.dashboard-progress {
+  max-width: 680px;
+  margin: 0 auto 16px;
+  padding: 22px 20px;
+  box-sizing: border-box;
+  background: #111512;
+  border: 1px solid #293129;
+  border-radius: 18px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+}
+
+.section-heading h2 {
+  color: #f5f7f5;
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -0.7px;
+}
+
+.section-heading > strong {
+  color: #b8ff3d;
+  font-size: 20px;
+}
+
+.dashboard-progress .progress-bar {
+  height: 8px;
+  margin: 20px 0 14px;
+  background: #283029;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.dashboard-progress .progress-fill {
+  height: 100%;
+  background: #b8ff3d;
+  border-radius: inherit;
+}
+
+.dashboard-progress > p {
+  color: #7f8b82;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Achievement */
+
+.achievement-card {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  box-sizing: border-box;
+  background: #111512;
+  border: 1px solid #293129;
+  border-radius: 18px;
+}
+
+.achievement-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.achievement-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #1c251b;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  flex-shrink: 0;
+}
+
+.achievement-row h3 {
+  color: #f5f7f5;
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.achievement-row p {
+  color: #7f8b82;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Dashboard footer */
+
+.dashboard footer {
+  max-width: 680px;
+  margin: 38px auto 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #626d64;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.dashboard footer strong {
+  color: #b8ff3d;
+  font-size: 14px;
+}
+
+/* Mobile */
+
+@media (max-width: 520px) {
+  .dashboard-header {
+    padding-top: 32px;
+  }
+
+  .streak-dashboard-card,
+  .today-card,
+  .dashboard-progress,
+  .achievement-card {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .dashboard-header {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .dashboard nav {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .dashboard footer {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
