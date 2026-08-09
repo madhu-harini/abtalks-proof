@@ -6,9 +6,181 @@ type Track =
   | 'Data Science'
   | 'AI / ML'
 
-/* =========================================================
-   SHARED NAV
-========================================================= */
+type DayProof = {
+  github?: string
+  linkedin?: string
+}
+
+type JourneyState = {
+  track: Track
+  completedDays: number[]
+  proofs: Record<number, DayProof>
+}
+
+const STORAGE_KEY = 'abtalks-journey'
+
+const missions = [
+  'Set up your development environment',
+  'Build a simple personal profile page',
+  'Create a responsive navigation bar',
+  'Build a reusable card component',
+  'Create a form with validation',
+  'Build a responsive landing page',
+  'Refactor one piece of existing code',
+  'Create a reusable button system',
+  'Build a simple dashboard layout',
+  'Create a searchable list',
+  'Build a modal component',
+  'Build a landing page',
+  'Create a pricing section',
+  'Build a responsive hero section',
+  'Create a portfolio project section',
+  'Build a contact form',
+  'Create a mobile-first layout',
+  'Build a reusable table',
+  'Create a loading state system',
+  'Build an error state',
+  'Create a settings page',
+  'Build a profile dashboard',
+  'Create a reusable input system',
+  'Build a notification component',
+  'Create a navigation sidebar',
+  'Build a statistics dashboard',
+  'Create a dark mode interface',
+  'Build a search experience',
+  'Create a filtering system',
+  'Build a project management card',
+  'Create a GitHub-style activity grid',
+  'Build a progress tracker',
+  'Create an authentication screen',
+  'Build a registration flow',
+  'Create a password reset screen',
+  'Build an API-powered interface',
+  'Connect a public API',
+  'Display API data cleanly',
+  'Handle API loading states',
+  'Handle API errors',
+  'Build a data visualization',
+  'Create a user analytics screen',
+  'Build a notification center',
+  'Create a command palette',
+  'Build a responsive dashboard',
+  'Create a reusable modal system',
+  'Build a complete feature page',
+  'Improve accessibility',
+  'Optimize your UI',
+  'Refactor your project',
+  'Add meaningful documentation',
+  'Improve your GitHub README',
+  'Create a project demo',
+  'Write a technical project post',
+  'Publish your work',
+  'Review your previous builds',
+  'Improve your strongest project',
+  'Create a polished portfolio case study',
+  'Prepare your final project',
+  'Ship your 60-day project',
+]
+
+function getDefaultJourney(): JourneyState {
+  return {
+    track:
+      (localStorage.getItem('abtalks-track') as Track) ||
+      'Software Engineering',
+
+    // Keeps the current demo experience.
+    // The user starts at Day 13 and can continue from there.
+    completedDays: Array.from(
+      { length: 12 },
+      (_, index) => index + 1
+    ),
+
+    proofs: {},
+  }
+}
+
+function loadJourney(): JourneyState {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY)
+
+    if (!saved) {
+      const initial = getDefaultJourney()
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(initial)
+      )
+      return initial
+    }
+
+    const parsed = JSON.parse(saved)
+
+    return {
+      track:
+        parsed.track ||
+        (localStorage.getItem('abtalks-track') as Track) ||
+        'Software Engineering',
+
+      completedDays: Array.isArray(
+        parsed.completedDays
+      )
+        ? parsed.completedDays
+        : [],
+
+      proofs:
+        parsed.proofs &&
+        typeof parsed.proofs === 'object'
+          ? parsed.proofs
+          : {},
+    }
+  } catch {
+    return getDefaultJourney()
+  }
+}
+
+function saveJourney(journey: JourneyState) {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(journey)
+  )
+
+  localStorage.setItem(
+    'abtalks-track',
+    journey.track
+  )
+}
+
+function getCurrentDay(completedDays: number[]) {
+  for (let day = 1; day <= 60; day++) {
+    if (!completedDays.includes(day)) {
+      return day
+    }
+  }
+
+  return 60
+}
+
+function getStreak(completedDays: number[]) {
+  let streak = 0
+
+  for (let day = 1; day <= 60; day++) {
+    if (completedDays.includes(day)) {
+      streak++
+    } else {
+      break
+    }
+  }
+
+  return streak
+}
+
+function isDayUnlocked(
+  day: number,
+  completedDays: number[]
+) {
+  if (day === 1) return true
+
+  return completedDays.includes(day - 1)
+}
 
 function Navigation() {
   return (
@@ -20,7 +192,10 @@ function Navigation() {
         }}
         aria-label="Go to ABTalks home"
       >
-        <span className="brand-mark">AB</span>
+        <span className="brand-mark">
+          AB
+        </span>
+
         <span>ABTalks</span>
       </button>
 
@@ -37,10 +212,6 @@ function Navigation() {
   )
 }
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
 function Footer() {
   return (
     <footer className="footer">
@@ -53,10 +224,6 @@ function Footer() {
     </footer>
   )
 }
-
-/* =========================================================
-   STUDENT SUCCESS
-========================================================= */
 
 const students = [
   {
@@ -89,10 +256,6 @@ const students = [
   },
 ]
 
-/* =========================================================
-   LANDING PAGE
-========================================================= */
-
 function LandingPage() {
   const [selectedTrack, setSelectedTrack] =
     useState<Track | null>(null)
@@ -100,10 +263,14 @@ function LandingPage() {
   const startChallenge = () => {
     if (!selectedTrack) return
 
-    localStorage.setItem(
-      'abtalks-track',
-      selectedTrack
-    )
+    const existing = loadJourney()
+
+    const updatedJourney: JourneyState = {
+      ...existing,
+      track: selectedTrack,
+    }
+
+    saveJourney(updatedJourney)
 
     window.location.href = '/dashboard'
   }
@@ -119,10 +286,6 @@ function LandingPage() {
 
   return (
     <main>
-      {/* =================================================
-          HERO
-      ================================================= */}
-
       <section className="hero-section">
         <div className="hero-glow" />
 
@@ -184,10 +347,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* =================================================
-          ABOUT
-      ================================================= */}
-
       <section
         className="about-section"
         id="about"
@@ -214,7 +373,9 @@ function LandingPage() {
 
         <div className="about-grid">
           <article className="about-card about-card-large">
-            <span className="about-number">01</span>
+            <span className="about-number">
+              01
+            </span>
 
             <div>
               <h3>Build, not just study.</h3>
@@ -228,7 +389,9 @@ function LandingPage() {
           </article>
 
           <article className="about-card">
-            <span className="about-number">02</span>
+            <span className="about-number">
+              02
+            </span>
 
             <div>
               <h3>Make your work visible.</h3>
@@ -241,7 +404,9 @@ function LandingPage() {
           </article>
 
           <article className="about-card">
-            <span className="about-number">03</span>
+            <span className="about-number">
+              03
+            </span>
 
             <div>
               <h3>Grow with the community.</h3>
@@ -254,10 +419,6 @@ function LandingPage() {
           </article>
         </div>
       </section>
-
-      {/* =================================================
-          INITIATIVES
-      ================================================= */}
 
       <section className="initiatives-section">
         <div className="section-intro">
@@ -336,10 +497,6 @@ function LandingPage() {
           </article>
         </div>
       </section>
-
-      {/* =================================================
-          STUDENT SUCCESS
-      ================================================= */}
 
       <section className="student-success-section">
         <div className="section-intro">
@@ -421,10 +578,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* =================================================
-          60 DAY CHALLENGE
-      ================================================= */}
-
       <section
         className="challenge-section"
         id="challenge"
@@ -467,10 +620,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* =================================================
-          HOW IT WORKS
-      ================================================= */}
-
       <section className="how-it-works-section">
         <div className="section-intro">
           <p className="section-label">
@@ -490,15 +639,12 @@ function LandingPage() {
         </div>
 
         <div className="process-list">
-
-          {/* STEP 01 */}
-
           <button
             type="button"
             className="process-step process-step-button"
-            onClick={() => {
+            onClick={() =>
               scrollToSection('track-selection')
-            }}
+            }
           >
             <span>01</span>
 
@@ -513,8 +659,6 @@ function LandingPage() {
 
             <b>→</b>
           </button>
-
-          {/* STEP 02 */}
 
           <button
             type="button"
@@ -539,13 +683,15 @@ function LandingPage() {
             <b>→</b>
           </button>
 
-          {/* STEP 03 */}
-
           <button
             type="button"
             className="process-step process-step-button"
             onClick={() => {
-              window.location.href = '/day/12'
+              const journey = loadJourney()
+              window.location.href =
+                `/day/${getCurrentDay(
+                  journey.completedDays
+                )}`
             }}
           >
             <span>03</span>
@@ -561,13 +707,15 @@ function LandingPage() {
             <b>→</b>
           </button>
 
-          {/* STEP 04 */}
-
           <button
             type="button"
             className="process-step process-step-button"
             onClick={() => {
-              window.location.href = '/day/12'
+              const journey = loadJourney()
+              window.location.href =
+                `/day/${getCurrentDay(
+                  journey.completedDays
+                )}`
             }}
           >
             <span>04</span>
@@ -582,8 +730,6 @@ function LandingPage() {
 
             <b>→</b>
           </button>
-
-          {/* STEP 05 */}
 
           <button
             type="button"
@@ -607,8 +753,6 @@ function LandingPage() {
             <b>→</b>
           </button>
 
-          {/* STEP 06 */}
-
           <button
             type="button"
             className="process-step process-step-button"
@@ -630,13 +774,8 @@ function LandingPage() {
 
             <b>→</b>
           </button>
-
         </div>
       </section>
-
-      {/* =================================================
-          PRODUCT EXPERIENCE
-      ================================================= */}
 
       <section className="experience-section">
         <div className="section-intro">
@@ -729,10 +868,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* =================================================
-          TRACK SELECTION
-      ================================================= */}
-
       <section
         className="track-section"
         id="track-selection"
@@ -755,9 +890,6 @@ function LandingPage() {
         </div>
 
         <div className="track-list">
-
-          {/* SOFTWARE ENGINEERING */}
-
           <button
             type="button"
             className={`track-card ${
@@ -792,8 +924,6 @@ function LandingPage() {
             </span>
           </button>
 
-          {/* DATA SCIENCE */}
-
           <button
             type="button"
             className={`track-card ${
@@ -802,9 +932,7 @@ function LandingPage() {
                 : ''
             }`}
             onClick={() =>
-              setSelectedTrack(
-                'Data Science'
-              )
+              setSelectedTrack('Data Science')
             }
           >
             <div className="track-icon">◫</div>
@@ -824,8 +952,6 @@ function LandingPage() {
               →
             </span>
           </button>
-
-          {/* AI / ML */}
 
           <button
             type="button"
@@ -885,10 +1011,6 @@ function LandingPage() {
         </button>
       </section>
 
-      {/* =================================================
-          BUILD PROVE GROW
-      ================================================= */}
-
       <section className="bpg-section">
         <div className="section-intro">
           <p className="section-label">
@@ -940,10 +1062,6 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* =================================================
-          FINAL CTA
-      ================================================= */}
-
       <section className="final-cta-section">
         <div className="final-cta-glow" />
 
@@ -988,17 +1106,25 @@ function LandingPage() {
   )
 }
 
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
 function DashboardPage() {
-  const savedTrack =
-    localStorage.getItem('abtalks-track') ||
-    'Software Engineering'
+  const [journey, setJourney] =
+    useState<JourneyState>(() =>
+      loadJourney()
+    )
 
-  const completedDays = 12
-  const currentDay = 12
+  const completedDays =
+    journey.completedDays
+
+  const currentDay =
+    getCurrentDay(completedDays)
+
+  const streak =
+    getStreak(completedDays)
+
+  const progress =
+    Math.round(
+      (completedDays.length / 60) * 100
+    )
 
   const days = Array.from(
     { length: 60 },
@@ -1010,37 +1136,65 @@ function DashboardPage() {
       icon: '🔥',
       title: 'First Week',
       description: 'Complete 7 days',
-      unlocked: completedDays >= 7,
+      unlocked:
+        completedDays.length >= 7,
     },
     {
       icon: '⚡',
       title: 'Consistency',
       description: 'Complete 10 days',
-      unlocked: completedDays >= 10,
+      unlocked:
+        completedDays.length >= 10,
     },
     {
       icon: '🏆',
       title: 'Halfway There',
       description: 'Reach Day 30',
-      unlocked: completedDays >= 30,
+      unlocked:
+        completedDays.length >= 30,
     },
     {
       icon: '💎',
       title: 'Challenge Complete',
       description: 'Finish all 60 days',
-      unlocked: completedDays >= 60,
+      unlocked:
+        completedDays.length >= 60,
     },
   ]
 
-  const unlockedCount = badges.filter(
-    (badge) => badge.unlocked
-  ).length
+  const unlockedCount =
+    badges.filter(
+      (badge) => badge.unlocked
+    ).length
+
+  const openDay = (day: number) => {
+    if (
+      completedDays.includes(day) ||
+      day === currentDay
+    ) {
+      window.location.href =
+        `/day/${day}`
+    }
+  }
+
+  const resetJourney = () => {
+    const fresh: JourneyState = {
+      track: journey.track,
+      completedDays: [],
+      proofs: {},
+    }
+
+    saveJourney(fresh)
+    setJourney(fresh)
+  }
 
   return (
     <main className="dashboard-page">
+      <Navigation />
+
       <section className="dashboard-header">
         <p className="section-label">
-          {savedTrack.toUpperCase()}
+          {journey.track.toUpperCase()}
         </p>
 
         <h1>
@@ -1050,8 +1204,9 @@ function DashboardPage() {
         </h1>
 
         <p>
-          You're on Day {currentDay} of your
-          60-day journey.
+          {completedDays.length >= 60
+            ? 'You completed the 60-day challenge.'
+            : `You're on Day ${currentDay} of your 60-day journey.`}
         </p>
       </section>
 
@@ -1061,44 +1216,75 @@ function DashboardPage() {
             CURRENT STREAK
           </span>
 
-          <strong>🔥 12 days</strong>
+          <strong>
+            🔥 {streak} days
+          </strong>
         </div>
 
         <span className="streak-small">
-          Best: 12
+          Best: {streak}
         </span>
       </section>
 
-      <section className="today-card">
-        <p className="section-label">
-          TODAY'S MISSION
-        </p>
+      {completedDays.length >= 60 ? (
+        <section className="today-card">
+          <p className="section-label">
+            CHALLENGE COMPLETE
+          </p>
 
-        <h2>Build a landing page</h2>
+          <h2>
+            You built the whole journey.
+          </h2>
 
-        <p>
-          Create a simple landing page that explains
-          your project clearly and gives visitors a
-          reason to explore it.
-        </p>
+          <p>
+            60 days. 60 builds. One visible body
+            of work. This is what consistency looks like.
+          </p>
 
-        <div className="task-meta">
-          <span>DAY 12</span>
-          <span>•</span>
-          <span>45 MIN</span>
-        </div>
+          <div className="task-meta">
+            <span>60 / 60 DAYS</span>
+            <span>•</span>
+            <span>100%</span>
+          </div>
+        </section>
+      ) : (
+        <section className="today-card">
+          <p className="section-label">
+            TODAY'S MISSION
+          </p>
 
-        <button
-          type="button"
-          className="primary-button"
-          onClick={() =>
-            (window.location.href = '/day/12')
-          }
-        >
-          Start today's task
-          <span>→</span>
-        </button>
-      </section>
+          <h2>
+            {missions[currentDay - 1]}
+          </h2>
+
+          <p>
+            Complete today's mission, save your proof
+            and keep your journey moving forward.
+          </p>
+
+          <div className="task-meta">
+            <span>
+              DAY {currentDay}
+            </span>
+
+            <span>•</span>
+
+            <span>45 MIN</span>
+          </div>
+
+          <button
+            type="button"
+            className="primary-button"
+            onClick={() =>
+              (window.location.href =
+                `/day/${currentDay}`)
+            }
+          >
+            Start today's task
+            <span>→</span>
+          </button>
+        </section>
+      )}
 
       <section className="dashboard-progress">
         <div className="section-heading">
@@ -1107,22 +1293,27 @@ function DashboardPage() {
               YOUR PROGRESS
             </p>
 
-            <h2>12 / 60 days</h2>
+            <h2>
+              {completedDays.length} / 60 days
+            </h2>
           </div>
 
-          <strong>20%</strong>
+          <strong>{progress}%</strong>
         </div>
 
         <div className="progress-bar">
           <div
             className="progress-fill"
-            style={{ width: '20%' }}
+            style={{
+              width: `${progress}%`,
+            }}
           />
         </div>
 
         <p>
-          12 completed days. Keep going — you're
-          building proof one day at a time.
+          {completedDays.length} completed days.
+          Keep going — you're building proof one
+          day at a time.
         </p>
       </section>
 
@@ -1138,50 +1329,62 @@ function DashboardPage() {
         </h2>
 
         <p className="journey-map-intro">
-          Every square represents one day of building,
-          proving and growing.
+          Every square represents one day of
+          building, proving and growing.
         </p>
 
         <div className="journey-map-card">
           <div className="journey-map-header">
             <div>
-              <strong>DAY {currentDay}</strong>
+              <strong>
+                DAY {currentDay}
+              </strong>
+
               <span> of 60</span>
             </div>
 
             <span className="journey-map-percent">
-              20%
+              {progress}%
             </span>
           </div>
 
           <div className="day-grid">
             {days.map((day) => {
               const isCompleted =
-                day <= completedDays
+                completedDays.includes(day)
 
               const isToday =
                 day === currentDay
 
-              const isMissed =
-                day === 8
+              const isLocked =
+                !isCompleted &&
+                !isToday
 
               return (
                 <button
                   type="button"
                   key={day}
                   className={`day-cell
-                    ${isCompleted ? 'completed' : ''}
-                    ${isToday ? 'today' : ''}
-                    ${isMissed ? 'missed' : ''}
-                    ${day > currentDay ? 'locked' : ''}
+                    ${
+                      isCompleted
+                        ? 'completed'
+                        : ''
+                    }
+                    ${
+                      isToday
+                        ? 'today'
+                        : ''
+                    }
+                    ${
+                      isLocked
+                        ? 'locked'
+                        : ''
+                    }
                   `}
                   title={`Day ${day}`}
-                  onClick={() => {
-                    if (day <= currentDay) {
-                      window.location.href =
-                        `/day/${day}`
-                    }
-                  }}
+                  onClick={() =>
+                    openDay(day)
+                  }
                 >
                   <span>{day}</span>
                 </button>
@@ -1201,11 +1404,6 @@ function DashboardPage() {
             </span>
 
             <span>
-              <i className="legend-dot missed-dot" />
-              Missed
-            </span>
-
-            <span>
               <i className="legend-dot locked-dot" />
               Upcoming
             </span>
@@ -1221,7 +1419,14 @@ function DashboardPage() {
             </p>
 
             <h2>
-              Top <span>18%</span>
+              Top <span>{Math.max(
+                1,
+                100 -
+                  Math.min(
+                    completedDays.length * 2,
+                    99
+                  )
+              )}%</span>
             </h2>
           </div>
 
@@ -1231,23 +1436,40 @@ function DashboardPage() {
         </div>
 
         <p>
-          You're ahead of most active participants.
-          Keep your streak alive to move higher.
+          Your standing improves as you complete
+          more days and keep your journey active.
         </p>
 
         <div className="standing-stats">
           <div>
-            <strong>12</strong>
+            <strong>
+              {completedDays.length}
+            </strong>
+
             <span>Days built</span>
           </div>
 
           <div>
-            <strong>12</strong>
-            <span>Proof posts</span>
+            <strong>
+              {
+                Object.keys(
+                  journey.proofs
+                ).length
+              }
+            </strong>
+
+            <span>Proof days</span>
           </div>
 
           <div>
-            <strong>#184</strong>
+            <strong>
+              #{Math.max(
+                1,
+                500 -
+                  completedDays.length * 8
+              )}
+            </strong>
+
             <span>Standing</span>
           </div>
         </div>
@@ -1260,7 +1482,9 @@ function DashboardPage() {
               ACHIEVEMENTS
             </p>
 
-            <h2>Keep unlocking.</h2>
+            <h2>
+              Keep unlocking.
+            </h2>
           </div>
 
           <span className="badge-count">
@@ -1282,9 +1506,13 @@ function DashboardPage() {
                 {badge.icon}
               </div>
 
-              <strong>{badge.title}</strong>
+              <strong>
+                {badge.title}
+              </strong>
 
-              <span>{badge.description}</span>
+              <span>
+                {badge.description}
+              </span>
 
               <small>
                 {badge.unlocked
@@ -1303,15 +1531,17 @@ function DashboardPage() {
 
         <div>
           <p className="section-label">
-            MISSED A DAY?
+            KEEP MOVING
           </p>
 
-          <h3>Your journey isn't broken.</h3>
+          <h3>
+            Your journey isn't broken.
+          </h3>
 
           <p>
-            One missed day doesn't erase your progress.
-            Come back, complete today's mission and
-            keep building.
+            One difficult day doesn't erase your
+            progress. Come back, complete today's
+            mission and keep building.
           </p>
         </div>
       </section>
@@ -1327,13 +1557,32 @@ function DashboardPage() {
           </span>
 
           <div>
-            <h3>12 Day Streak</h3>
+            <h3>
+              {streak} Day Streak
+            </h3>
 
             <p>
-              You've shown up consistently for 12 days.
+              You've shown up consistently for{' '}
+              {streak} days.
             </p>
           </div>
         </div>
+      </section>
+
+      <section
+        style={{
+          marginTop: '2rem',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <button
+          type="button"
+          className="secondary-button"
+          onClick={resetJourney}
+        >
+          Reset demo journey
+        </button>
       </section>
 
       <Footer />
@@ -1341,22 +1590,164 @@ function DashboardPage() {
   )
 }
 
-/* =========================================================
-   DAY PAGE
-========================================================= */
-
 function DayPage() {
+  const path = window.location.pathname
+
+  const routeDay = Number(
+    path.split('/')[2]
+  )
+
+  const safeDay =
+    Number.isInteger(routeDay) &&
+    routeDay >= 1 &&
+    routeDay <= 60
+      ? routeDay
+      : 1
+
+  const [journey, setJourney] =
+    useState<JourneyState>(() =>
+      loadJourney()
+    )
+
+  const isCompleted =
+    journey.completedDays.includes(
+      safeDay
+    )
+
+  const isUnlocked =
+    isDayUnlocked(
+      safeDay,
+      journey.completedDays
+    )
+
+  
+  const proof =
+    journey.proofs[safeDay] || {}
+
+  const [github, setGithub] =
+    useState(proof.github || '')
+
+  const [linkedin, setLinkedin] =
+    useState(proof.linkedin || '')
+
+  const mission =
+    missions[safeDay - 1] ||
+    'Complete today’s challenge.'
+
+  const completeBuild = () => {
+    if (!isUnlocked) return
+
+    if (
+      journey.completedDays.includes(
+        safeDay
+      )
+    ) {
+      return
+    }
+
+    const updatedCompletedDays =
+      [
+        ...journey.completedDays,
+        safeDay,
+      ].sort((a, b) => a - b)
+
+    const updatedJourney: JourneyState = {
+      ...journey,
+      completedDays:
+        updatedCompletedDays,
+    }
+
+    saveJourney(updatedJourney)
+    setJourney(updatedJourney)
+  }
+
+  const saveProof = (
+    type: 'github' | 'linkedin'
+  ) => {
+    const value =
+      type === 'github'
+        ? github.trim()
+        : linkedin.trim()
+
+    if (!value) return
+
+    const updatedJourney: JourneyState = {
+      ...journey,
+      proofs: {
+        ...journey.proofs,
+        [safeDay]: {
+          ...journey.proofs[safeDay],
+          [type]: value,
+        },
+      },
+    }
+
+    saveJourney(updatedJourney)
+    setJourney(updatedJourney)
+  }
+
+  if (!isUnlocked) {
+    return (
+      <main className="day-page">
+        <Navigation />
+
+        <section className="completion-card">
+          <span className="completion-icon">
+            🔒
+          </span>
+
+          <p className="section-label">
+            DAY {safeDay}
+          </p>
+
+          <h2>
+            This day is
+            <br />
+            <span>locked.</span>
+          </h2>
+
+          <p>
+            Complete Day {safeDay - 1} before
+            unlocking this mission.
+          </p>
+
+          <button
+            type="button"
+            className="primary-button"
+            onClick={() =>
+              (window.location.href =
+                '/dashboard')
+            }
+          >
+            Back to dashboard
+            <span>→</span>
+          </button>
+        </section>
+
+        <Footer />
+      </main>
+    )
+  }
+
   return (
     <main className="day-page">
+      <Navigation />
+
       <section className="day-hero">
         <p className="section-label">
-          DAY 12 / 60
+          DAY {safeDay} / 60
         </p>
 
         <h1>
-          Build a
+          {isCompleted
+            ? 'Mission'
+            : 'Build your'}
           <br />
-          <span>landing page.</span>
+          <span>
+            {isCompleted
+              ? 'complete.'
+              : mission.toLowerCase()}
+          </span>
         </h1>
 
         <p className="day-intro">
@@ -1377,29 +1768,35 @@ function DayPage() {
         </p>
 
         <h2>
-          Create something worth showing.
+          {mission}
         </h2>
 
         <p>
-          Build a simple landing page that explains
-          your project clearly and gives visitors a
-          reason to care.
+          Build something useful, document your
+          work and leave behind a piece of proof
+          that shows what you accomplished today.
         </p>
 
         <div className="mission-points">
           <div>
             <span>01</span>
-            <p>Choose a clear idea</p>
+            <p>
+              Understand the mission
+            </p>
           </div>
 
           <div>
             <span>02</span>
-            <p>Build the landing page</p>
+            <p>
+              Build the solution
+            </p>
           </div>
 
           <div>
             <span>03</span>
-            <p>Ship it publicly</p>
+            <p>
+              Ship it publicly
+            </p>
           </div>
         </div>
       </section>
@@ -1431,9 +1828,18 @@ function DayPage() {
             <button
               type="button"
               className="primary-button"
+              disabled={isCompleted}
+              onClick={completeBuild}
             >
-              Mark build complete
-              <span>✓</span>
+              {isCompleted
+                ? 'Build completed ✓'
+                : 'Mark build complete'}
+
+              <span>
+                {isCompleted
+                  ? '✓'
+                  : '→'}
+              </span>
             </button>
           </div>
         </div>
@@ -1450,42 +1856,70 @@ function DayPage() {
               PROVE
             </span>
 
-            <h3>Show your work</h3>
+            <h3>
+              Show your work
+            </h3>
 
             <p>
-              Add the GitHub commit and LinkedIn post
-              that prove you showed up today.
+              Add the GitHub commit and LinkedIn
+              post that prove you showed up today.
             </p>
 
             <div className="proof-input-group">
-              <label>GITHUB COMMIT</label>
+              <label>
+                GITHUB COMMIT
+              </label>
 
               <input
                 type="url"
+                value={github}
+                onChange={(event) =>
+                  setGithub(
+                    event.target.value
+                  )
+                }
                 placeholder="https://github.com/..."
               />
 
               <button
                 type="button"
                 className="secondary-button"
+                onClick={() =>
+                  saveProof('github')
+                }
               >
-                Add GitHub proof
+                {proof.github
+                  ? 'GitHub proof saved ✓'
+                  : 'Add GitHub proof'}
               </button>
             </div>
 
             <div className="proof-input-group">
-              <label>LINKEDIN POST</label>
+              <label>
+                LINKEDIN POST
+              </label>
 
               <input
                 type="url"
+                value={linkedin}
+                onChange={(event) =>
+                  setLinkedin(
+                    event.target.value
+                  )
+                }
                 placeholder="https://linkedin.com/..."
               />
 
               <button
                 type="button"
                 className="secondary-button"
+                onClick={() =>
+                  saveProof('linkedin')
+                }
               >
-                Add LinkedIn proof
+                {proof.linkedin
+                  ? 'LinkedIn proof saved ✓'
+                  : 'Add LinkedIn proof'}
               </button>
             </div>
           </div>
@@ -1516,10 +1950,23 @@ function DayPage() {
               <span>🔥</span>
 
               <div>
-                <strong>12 day streak</strong>
+                <strong>
+                  {
+                    getStreak(
+                      journey.completedDays
+                    )
+                  } day streak
+                </strong>
 
                 <p>
-                  48 days left in your journey.
+                  {
+                    Math.max(
+                      0,
+                      60 -
+                        journey.completedDays
+                          .length
+                    )
+                  } days left in your journey.
                 </p>
               </div>
             </div>
@@ -1529,33 +1976,60 @@ function DayPage() {
 
       <section className="completion-card">
         <span className="completion-icon">
-          ✦
+          {isCompleted ? '✓' : '✦'}
         </span>
 
         <p className="section-label">
-          KEEP GOING
+          {isCompleted
+            ? 'DAY COMPLETE'
+            : 'KEEP GOING'}
         </p>
 
         <h2>
-          Your next piece
+          {isCompleted
+            ? 'You built it.'
+            : 'Your next piece'}
           <br />
-          <span>of proof.</span>
+          <span>
+            {isCompleted
+              ? 'Keep the momentum.'
+              : 'of proof.'}
+          </span>
         </h2>
 
         <p>
-          Complete today's build and keep your
-          developer journey moving forward.
+          {isCompleted
+            ? safeDay < 60
+              ? `Day ${safeDay} is complete. Day ${
+                  safeDay + 1
+                } is waiting for you.`
+              : 'You completed all 60 days. You did it.'
+            : 'Complete today’s build and keep your developer journey moving forward.'}
         </p>
 
         <button
           type="button"
           className="primary-button"
-          onClick={() =>
-            (window.location.href =
-              '/dashboard')
-          }
+          onClick={() => {
+            if (
+              isCompleted &&
+              safeDay < 60
+            ) {
+              window.location.href =
+                `/day/${safeDay + 1}`
+            } else {
+              window.location.href =
+                '/dashboard'
+            }
+          }}
         >
-          Back to dashboard
+          {isCompleted &&
+          safeDay < 60
+            ? `Continue to Day ${
+                safeDay + 1
+              }`
+            : 'Back to dashboard'}
+
           <span>→</span>
         </button>
       </section>
@@ -1565,12 +2039,9 @@ function DayPage() {
   )
 }
 
-/* =========================================================
-   ROUTING
-========================================================= */
-
 function App() {
-  const path = window.location.pathname
+  const path =
+    window.location.pathname
 
   if (path === '/dashboard') {
     return <DashboardPage />
