@@ -1,90 +1,135 @@
-# ABTalks 2.0
+# ABTalks Proof
 
-## Build proof, not just projects.
+> Don't just learn. Build proof.
 
-ABTalks 2.0 is a mobile-first redesign of the ABTalks 60-day coding challenge platform.
+ABTalks Proof is a practical 60-day learning and building platform designed to help students and early professionals turn consistent daily work into visible career proof.
 
-The goal is to help college students build consistently, showcase their progress, and become visible to recruiters through real proof of work.
-
-## Core Journey
+The idea is simple:
 
 **BUILD → PROVE → GROW**
 
-Every day, students build something, submit proof of their work, and turn their progress into a visible developer journey.
+Instead of only consuming tutorials, participants complete daily missions, build something real, document their work, and create a visible record of their progress.
 
-## The Experience
+## 🚀 Live Demo
 
-### Daily Coding Missions
+https://abtalks-proof-ihx6.vercel.app/
 
-Students receive a focused coding mission every day and build something consistently throughout the 60-day challenge.
+## ✨ Features
 
-### Proof of Work
+- 🎯 60-day structured learning journey
+- 🧭 Multiple learning tracks
+  - Software Engineering
+  - Data Science
+  - AI / ML
+- 📅 Daily building missions
+- 🔥 Streak tracking
+- 📊 Progress dashboard
+- 🗺️ 60-day journey map
+- 🏆 Achievement system
+- 🔒 Sequential day unlocking
+- 💻 GitHub proof links
+- 💼 LinkedIn proof links
+- 💾 Local progress persistence
+- 📱 Responsive UI
+- ⚡ Fast Vite production build
+- 🚀 Vercel deployment
 
-Students submit:
+## 🧠 How It Works
 
-* GitHub repository / commit
-* LinkedIn learning reflection
+### 1. Choose your track
 
-Their daily work becomes evidence of what they can actually build.
+Choose the direction you want to focus on:
 
-### Proof Portfolio
+- Software Engineering
+- Data Science
+- AI / ML
 
-ABTalks 2.0 is designed around the idea of a **Proof Portfolio**.
+### 2. Get your daily mission
 
-Instead of treating the challenge as only a streak counter, daily projects and reflections can become a coherent record of the student's development journey.
+Each day provides a focused practical task.
 
-**60 days of proof. One developer story.**
+### 3. Build
 
-## Designed For
+Spend time actually creating something.
 
-### 🌱 First & Second Year Students
+### 4. Prove
 
-Students exploring development, learning fundamentals, and building confidence through small projects.
+Add links to your work, such as:
 
-### ⚡ Third Year Students
+- GitHub commits
+- LinkedIn posts
 
-Students preparing for internships and placements who need stronger projects and visible proof of their skills.
+### 5. Grow
 
-### 🚀 Final Year Students
+Your completed days, streak and achievements become a visible record of your progress.
 
-Students becoming industry-ready and building a portfolio that communicates what they can actually do.
+---
 
-## Design Direction
+## 🗓️ The 60-Day Journey
 
-A futuristic developer growth companion combining:
+The challenge contains 60 practical missions covering areas such as:
 
-* Professional career guidance
-* Friendly learning support
-* Gamified consistency
-* Proof-of-work storytelling
+- Frontend development
+- Responsive design
+- Components
+- Forms
+- Dashboards
+- APIs
+- Loading and error states
+- Data visualization
+- Accessibility
+- UI optimization
+- Refactoring
+- Documentation
+- GitHub
+- Portfolio development
+- Project publishing
+- Technical communication
+- Final project shipping
 
-The experience is designed **mobile-first**, with the primary judging viewport of **390px** in mind.
+The goal isn't simply to finish 60 tasks.
 
-## Core Routes
+The goal is to finish 60 days with **60 pieces of evidence that you built something.**
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- CSS
+
+### Development
+
+- Node.js
+- npm
+- Git
+- GitHub
+
+### Deployment
+
+- Vercel
+
+---
+
+## 📂 Project Structure
 
 ```text
-/
-/dashboard
-/day/12
-```
-
-## Built With
-
-* React
-* TypeScript
-* Vite
-* CSS
-
-## Project Status
-
-🚧 Built during the ABTalks Vibe Code Hackathon.
-
-The project is being developed iteratively with AI-assisted development and documented through `PROMPTS.md`.
-
-## Development Philosophy
-
-The goal is not simply to help students maintain a streak.
-
-The goal is to help them finish 60 days with something more valuable:
-
-**60 days of proof. One developer story.**
+abtalks-proof/
+│
+├── public/
+│
+├── src/
+│   ├── App.tsx
+│   ├── App.css
+│   ├── main.tsx
+│   └── ...
+│
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
