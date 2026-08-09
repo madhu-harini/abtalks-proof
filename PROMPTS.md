@@ -1,155 +1,363 @@
 # AI Usage Log — ABTalks 2.0
 
-## Session 1 — Project Foundation & Product Direction
+This document records the major ways AI was used during the development of ABTalks 2.0.
 
-**Date:** 08 August 2026
+AI was used as a development and thinking partner for product planning, UX decisions, implementation, debugging, documentation, and deployment guidance.
+
+The developer remained responsible for the final product decisions, implementation review, testing, and deployment.
+
+---
+
+# Session 1 — Project Foundation & Product Direction
+
+**Date:** 08 August 2026  
 **AI Tool:** ChatGPT
 
-### Purpose
+## Purpose
 
-Used AI assistance to understand the ABTalks hackathon requirements, select a problem statement, plan the product direction, and establish the development workflow.
+Used AI assistance to understand the ABTalks hackathon requirements, select a problem statement, plan the product direction, and establish the initial development workflow.
 
-### Prompts / Tasks
+## Prompts / Tasks
 
-* Analyzed the ABTalks hackathon problem statements and selected the **ABTalks 60-Day Coding Challenge redesign**.
-* Broke down the requirements for:
+- Analyzed the ABTalks hackathon problem statements.
+- Selected the **ABTalks 60-Day Coding Challenge redesign** as the project direction.
+- Broke down the expected product experience into:
+  - Landing page
+  - Student dashboard
+  - Daily challenge experience
+- Discussed how the product could help students build consistency through practical work.
+- Explored ways to make daily learning more visible and useful for students.
+- Brainstormed ideas around:
+  - Career growth
+  - Beginner-friendly learning
+  - Internship preparation
+  - Placement preparation
+  - Final-year career readiness
+  - Developer-focused product design
+- Learned the basics of GitHub repositories and Git workflow.
+- Planned the initial project structure and documentation.
 
-  * Landing page (`/`)
-  * Student dashboard (`/dashboard`)
-  * Challenge day (`/day/12`)
-* Discussed how the product could help college students build consistency and create visible proof of work.
-* Planned ABTalks 2.0 as a portfolio-worthy student growth platform.
-* Explored ideas around:
-
-  * Career-stage based guidance
-  * Beginner-friendly learning support
-  * Internship and placement preparation
-  * Final-year career readiness
-  * Developer-focused visual design
-* Learned the basics of GitHub repositories and Git workflow.
-* Created the initial project documentation.
-
-### AI Assistance Provided
+## AI Assistance Provided
 
 AI helped with:
 
-* Understanding and breaking down the hackathon problem statement.
-* Explaining GitHub and Git concepts for a beginner.
-* Planning the initial product direction.
-* Structuring the README.
-* Explaining the VS Code and local development workflow.
+- Understanding the hackathon problem statement.
+- Breaking the problem into smaller product requirements.
+- Brainstorming the initial product direction.
+- Explaining Git and GitHub concepts.
+- Planning the initial development workflow.
+- Structuring the project documentation.
 
-### Human Decisions
+## Human Decisions
 
 The developer decided:
 
-* To build the ABTalks redesign challenge.
-* Project name: **ABTalks 2.0**.
-* To use a mobile-first approach because the judging viewport is 390px wide.
-* To focus the experience on student growth, consistency, and proof of work.
-* To explore career-stage based guidance as part of the product experience.
+- To build the ABTalks 60-Day Coding Challenge redesign.
+- To name the project **ABTalks 2.0**.
+- To focus on helping students turn daily learning into visible progress.
+- To prioritize a mobile-first experience.
+- To design the product around consistency, practical building, and proof of work.
+- To use a developer-focused visual identity.
 
-### Completed Progress
+## Completed Progress
 
-* Repository created
-* Git setup completed
-* README created
-* AI usage documentation created
-* React + Vite project initialized
+- Project concept established.
+- Repository created.
+- Git setup completed.
+- Initial documentation created.
+- React + Vite project initialized.
+- Initial product direction established.
 
 ---
 
 # Session 2 — Landing Page Build
 
-**Date:** 08 August 2026
+**Date:** 08 August 2026  
 **AI Tool:** ChatGPT
 
-### Purpose
+## Purpose
 
-Used AI assistance to build the first working version of the ABTalks 2.0 landing page and establish the visual direction for the product.
+Used AI assistance to build the first working version of the ABTalks 2.0 landing page and establish the initial visual direction.
 
-### Prompts / Tasks
+## Prompts / Tasks
 
-* Replaced the default Vite starter interface with the initial ABTalks landing-page structure.
+- Replaced the default Vite starter interface with an ABTalks landing page.
+- Planned the landing page around the core product message:
 
-* Planned the landing page around the core message:
+**BUILD → PROVE → GROW**
 
-  **BUILD → PROVE → GROW**
+- Structured the landing page to communicate:
+  - What ABTalks is.
+  - What the 60-day challenge is.
+  - Why daily proof of work matters.
+  - How the challenge works.
+  - How users can start the challenge.
+- Planned and implemented sections for:
+  - Navigation
+  - Hero
+  - Proof-of-work concept
+  - Progress and streak visualization
+  - How it works
+  - Call-to-action
+  - Footer
+- Added mobile-first CSS styling.
+- Created a dark developer-oriented visual system.
+- Added a lime accent color to create a stronger product identity.
+- Added responsive behavior for larger screens.
+- Tested the experience using a 390px mobile viewport.
 
-* Structured the landing page to communicate:
-
-  * What ABTalks is
-  * The 60-day challenge
-  * The value of daily proof of work
-  * How the challenge works
-  * A clear call to start the challenge
-
-* Created sections for:
-
-  * Navigation
-  * Hero
-  * Proof-of-work concept
-  * Progress/streak visualization
-  * How it works
-  * Final call-to-action
-  * Footer
-
-* Added mobile-first CSS styling.
-
-* Added a dark developer-oriented visual system with a lime accent color.
-
-* Added responsive behavior for larger screens.
-
-* Tested the page using a 390px mobile viewport.
-
-### AI Assistance Provided
+## AI Assistance Provided
 
 AI helped with:
 
-* Translating the product concept into a React component structure.
-* Creating the initial landing-page JSX.
-* Creating the initial CSS design system.
-* Explaining the purpose of `App.tsx`, `App.css`, `index.css`, and `main.tsx`.
-* Guiding mobile viewport testing.
-* Troubleshooting the local Vite development environment.
+- Translating the product concept into a React component structure.
+- Creating and refining the initial JSX.
+- Creating and refining the CSS.
+- Explaining the purpose of:
+  - `App.tsx`
+  - `App.css`
+  - `index.css`
+  - `main.tsx`
+- Explaining the local Vite development workflow.
+- Troubleshooting development issues.
+- Thinking through the mobile-first layout.
 
-### Human Decisions
+## Human Decisions
 
 The developer decided:
 
-* To prioritize the 390px mobile experience.
-* To use a dark developer-focused visual style.
-* To communicate the product through **BUILD → PROVE → GROW**.
-* To make the experience feel more like a developer growth product rather than a generic coding challenge website.
+- To prioritize the required 390px mobile experience.
+- To use a dark developer-focused visual style.
+- To communicate the product through **BUILD → PROVE → GROW**.
+- To make the product feel like a developer growth platform rather than a generic coding challenge.
+- To keep the interface focused and practical.
 
-### Completed Progress
+## Completed Progress
 
-* Default Vite landing page replaced
-* ABTalks landing-page structure implemented
-* Landing-page styling implemented
-* Responsive styling added
-* 390px viewport tested successfully
-* Local development server verified
+- Default Vite landing page replaced.
+- ABTalks landing page structure implemented.
+- Landing page styling implemented.
+- Responsive styling added.
+- 390px viewport tested.
+- Local development server verified.
 
 ---
 
-# Product Direction — Proof Portfolio
+# Session 3 — Proof of Work & Product Experience Direction
 
-**Date:** 08 August 2026
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
 
-### Concept
+## Purpose
 
-During the product-design process, the project direction evolved from simply tracking a 60-day streak toward making the student's daily work useful beyond the challenge.
+Evolve the product beyond a simple 60-day streak tracker and explore how the student's daily work could become meaningful career evidence.
 
-The core idea is a **Proof Portfolio**.
+## Product Direction
 
-Instead of treating the student's progress as only a number such as:
+During the product-design process, the idea evolved from simply tracking a student's daily streak into creating a **Proof of Work** experience.
 
-> 12-day streak
+The central idea became:
 
-ABTalks can turn daily GitHub submissions and LinkedIn reflections into a visible record of the student's development journey.
+BUILD  
+Complete the daily mission  
+↓  
+PROVE  
+Submit evidence of the work  
+↓  
+GROW  
+Build a visible development journey
 
-### Intended Experience
+Instead of showing only:
+
+12-day streak
+
+the product could eventually communicate:
+
+- What I built
+- What I learned
+- What skills I practiced
+- What I proved
+- How consistently I worked
+
+## Why This Concept
+
+Students often have:
+
+- GitHub repositories
+- Projects
+- LinkedIn posts
+- Certificates
+- Learning experiences
+
+but these can exist separately without telling a coherent story.
+
+The ABTalks experience was therefore designed to connect daily work into a visible development journey.
+
+## AI Assistance Provided
+
+AI helped:
+
+- Explore the difference between learning and proving.
+- Brainstorm ways to make daily work visible.
+- Structure the **BUILD → PROVE → GROW** loop.
+- Think through how GitHub and LinkedIn could become evidence of progress.
+- Explore how a student's daily work could eventually become a portfolio-like journey.
+- Think through the relationship between consistency and career proof.
+- Plan how the dashboard and daily challenge could support this concept.
+
+## Human Decision
+
+The developer chose **Proof of Work** as one of the central ideas of the product.
+
+The goal was not to create another platform that only tracks completion.
+
+The goal became:
+
+> **Don't just learn. Build proof.**
+
+## Intended Experience
+
+The intended product loop became:
+
+ABTALKS  
+↓  
+BUILD  
+Complete the mission  
+↓  
+PROVE  
+Submit GitHub + LinkedIn proof  
+↓  
+GROW  
+Track progress and consistency  
+↓  
+NEXT MISSION  
+↓  
+BUILD
+
+## Planned Product Areas
+
+Based on this direction, the next major product areas were identified:
+
+- Track selection.
+- Student dashboard.
+- 60-day journey.
+- Daily challenge experience.
+- GitHub proof submission.
+- LinkedIn proof submission.
+- Progress tracking.
+- Achievement system.
+- Persistent student progress.
+
+## Completed Progress
+
+- Proof-of-work concept established.
+- BUILD → PROVE → GROW product loop established.
+- Dashboard direction planned.
+- Daily challenge direction planned.
+- GitHub and LinkedIn proof concept established.
+- Product direction evolved from a simple streak tracker into a visible student development journey.
+
+- ---
+
+# Session 4 — Landing Page & Student Experience Refinement
+
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
+
+## Purpose
+
+Refine the initial ABTalks landing page and start shaping the experience around student motivation, trust, consistency, and visible progress.
+
+## Prompts / Tasks
+
+- Reviewed the initial landing page experience.
+- Identified areas where the page could communicate the product value more clearly.
+- Refined the hero section and product messaging.
+- Strengthened the **BUILD → PROVE → GROW** concept.
+- Added clearer explanations of how the 60-day challenge works.
+- Explored ways to make the challenge feel credible and motivating.
+- Added a trust-oriented section to explain why the challenge matters.
+- Added a previous-student journey/alumni-style section to demonstrate what completing the challenge could look like.
+- Improved calls to action.
+- Refined the overall visual hierarchy and content flow.
+- Continued testing the experience at the required 390px mobile viewport.
+
+## AI Assistance Provided
+
+AI helped with:
+
+- Reviewing the existing landing page structure.
+- Identifying weak or unclear sections.
+- Improving product messaging.
+- Brainstorming trust-building sections.
+- Refining the user journey from landing page to challenge.
+- Improving responsive layout decisions.
+- Suggesting UX improvements.
+- Refining React and CSS implementation.
+
+## Human Decisions
+
+The developer decided:
+
+- The landing page should communicate the product value before asking users to start.
+- The experience should feel like a serious student growth platform.
+- The product should emphasize building and proving rather than simply completing tasks.
+- The interface should remain focused and avoid unnecessary complexity.
+
+## Completed Progress
+
+- Landing page messaging refined.
+- Trust section added.
+- Student journey/alumni-style section added.
+- Calls to action improved.
+- Mobile experience refined.
+- BUILD → PROVE → GROW storytelling strengthened.
+
+---
+
+# Session 5 — Proof Portfolio Concept
+
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
+
+## Purpose
+
+Develop the Proof of Work idea further and explore how ABTalks could turn daily challenge activity into a visible development journey.
+
+## Concept
+
+The product direction evolved from a simple challenge tracker into a **Proof Portfolio** concept.
+
+Instead of treating progress only as:
+
+**12-day streak**
+
+the product could help students build a record of:
+
+- What they built.
+- What they learned.
+- Which skills they practiced.
+- What they submitted as proof.
+- How consistently they worked.
+- How their projects developed over time.
+
+## Why This Concept
+
+Students often have:
+
+- GitHub repositories
+- Projects
+- LinkedIn posts
+- Certificates
+- Learning experiences
+
+but these can exist separately without telling a coherent story.
+
+The ABTalks experience was therefore designed to connect daily work into a visible development journey.
+
+## Intended Experience
+
+The core loop became:
 
 ```text
 BUILD
@@ -160,82 +368,242 @@ Submit GitHub + LinkedIn proof
         ↓
 GROW
 Build a visible developer journey
-```
 
-### Why This Idea
+# Session 6 — Track Selection
 
-Many students have projects, GitHub repositories, LinkedIn posts, and certificates scattered across different places.
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
 
-The Proof Portfolio concept aims to connect the student's daily work into a coherent progression that can eventually communicate:
+## Purpose
 
-* What they built
-* What they learned
-* Which skills they practiced
-* How consistently they worked
-* How their projects evolved
+Make the 60-day challenge adaptable to different technology interests.
 
-This concept will guide the design of the dashboard and challenge-day experience.
+The product was expanded to allow students to choose a learning track before starting their journey.
 
-### Implementation Status
+## Tracks Added
 
-**Concept established — implementation planned for subsequent screens.**
+### Software Engineering
+
+Focused on:
+
+- Web development
+- Applications
+- Components
+- Interfaces
+- APIs
+- Software projects
+
+### Data Science
+
+Focused on:
+
+- Data
+- Analysis
+- Visualization
+- Insights
+- Practical data projects
+
+### AI / ML
+
+Focused on:
+
+- Artificial intelligence
+- Machine learning
+- AI applications
+- Intelligent systems
+
+## AI Assistance Provided
+
+AI helped with:
+
+- Structuring the track-selection experience.
+- Writing concise track descriptions.
+- Designing the selection interaction.
+- Thinking through how the selected track should affect the student's journey.
+- Connecting the selected track to the dashboard experience.
+- Planning the user flow from landing page → track selection → dashboard.
+
+## Human Decisions
+
+The developer decided:
+
+- To provide three clear technology tracks.
+- To keep the track-selection experience simple.
+- To make the selected track visible throughout the student's journey.
+- To focus the tracks around practical building rather than only theoretical learning.
+
+## Completed Progress
+
+- Track-selection UI implemented.
+- Software Engineering track added.
+- Data Science track added.
+- AI / ML track added.
+- Selected track stored in local browser state.
+- Selected track displayed in the dashboard.
+- Landing page connected to track selection.
 
 ---
 
-# Development Workflow
+# Session 7 — Student Dashboard
 
-The project is being developed iteratively.
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
 
-For each major feature:
+## Purpose
 
-1. Plan the experience.
-2. Use AI assistance where helpful.
-3. Implement the feature.
-4. Test it locally.
-5. Test the mobile experience.
-6. Update this AI usage log.
-7. Commit the milestone to Git.
+Build the student's command center for the 60-day challenge.
 
-The AI usage log is maintained throughout development rather than reconstructed after the project is completed.
+The dashboard was designed to give the student a clear overview of their current progress and what they should do next.
 
-## AI Development Log — Landing Page & Dashboard
+## Dashboard Features
 
-### Session: Product Experience & UI Development
+The dashboard was designed to display:
 
-I used AI as a design and development partner to iterate on the ABTalks student experience.
+- Current track
+- Current day
+- Current streak
+- Today's mission
+- Overall progress
+- 60-day journey map
+- Standing
+- Proof count
+- Achievements
+- Latest achievement
+- Continue journey actions
 
-#### What I worked on
-- Refined the landing page around the BUILD → PROVE → GROW concept.
-- Added a trust section to make the challenge feel more credible.
-- Added a previous-student journey/alumni-style section to show what completing the challenge could look like.
-- Added track selection for:
-  - Software Engineering
-  - Data Science
-  - AI
-- Built a student dashboard using mocked data.
-- Added current streak, today's mission, challenge progress and achievements.
-- Added navigation from the landing page → dashboard.
-- Designed the experience mobile-first around the required 390px viewport.
-- Added dark visual styling and improved the overall visual hierarchy.
+## AI Assistance Provided
 
-#### How AI was used
-AI helped me:
-- Structure the page sections and user flow.
-- Generate and refine React/TypeScript components.
-- Develop and troubleshoot CSS.
-- Think through student motivation, trust and consistency.
-- Identify missing dashboard elements such as achievements and progress.
-- Iterate on the interface based on visual feedback.
+AI helped with:
 
-#### Design decisions
-The experience is intentionally structured around:
+- Structuring the dashboard layout.
+- Planning the information hierarchy.
+- Creating React/TypeScript state.
+- Designing progress calculations.
+- Designing achievement logic.
+- Building the 60-day journey grid.
+- Implementing navigation between the dashboard and daily missions.
+- Troubleshooting TypeScript issues.
+- Improving the dashboard experience for mobile screens.
 
-BUILD → PROVE → GROW
+## Human Decisions
 
-The goal is to make the challenge feel like a developer journey rather than simply a 60-day streak counter.
+The developer decided that the dashboard should feel like a:
 
-#### Current status
-Landing page → Track selection → Dashboard
+> **Personal command center**
 
-Next:
-Build the daily challenge experience at `/day/12`, including the coding mission and GitHub + LinkedIn proof submission.
+rather than a simple task list.
+
+The dashboard should immediately answer:
+
+- Where am I?
+- What have I completed?
+- What is my streak?
+- What should I do next?
+- How much of the challenge have I completed?
+- What proof have I created?
+
+## Completed Progress
+
+- `/dashboard` implemented.
+- Current track displayed.
+- Current day displayed.
+- Streak calculation implemented.
+- Progress calculation implemented.
+- Achievement system connected.
+- 60-day journey map implemented.
+- Daily mission navigation implemented.
+- Continue-journey actions implemented.
+- Mobile dashboard layout implemented.
+
+# Session 8 — 60-Day Journey System
+
+**Date:** 08 August 2026  
+**AI Tool:** ChatGPT
+
+## Purpose
+
+Turn the challenge into an actual sequential 60-day journey instead of a static list of tasks.
+
+The goal was to make progress meaningful by requiring students to complete the current day before moving to the next one.
+
+## Functionality Added
+
+- 60 individual missions.
+- Day unlocking.
+- Completed-day tracking.
+- Current-day calculation.
+- Streak calculation.
+- Progress percentage.
+- Locked future days.
+- Completed day states.
+- Current day state.
+- Challenge completion state.
+
+## Journey Rules
+
+Day 1 starts unlocked.
+
+After completing Day 1:
+
+```text
+Day 2 → unlocked
+
+After completing Day 2:
+
+Day 3 → unlocked
+
+This continues sequentially until Day 60.
+
+Future days remain locked until the previous day has been completed.
+
+Journey States
+Locked
+
+The student has not yet unlocked the day.
+
+Current
+
+The day is currently available to complete.
+
+Completed
+
+The student has completed the mission.
+
+Challenge Complete
+
+All 60 days have been completed.
+
+AI Assistance Provided
+
+AI helped with:
+
+Designing the journey state.
+Planning the relationship between completed days and unlocked days.
+Implementing day-unlocking logic.
+Implementing completed-day tracking.
+Calculating progress.
+Calculating streaks.
+Handling current-day logic.
+Handling locked-day behavior.
+Handling challenge completion states.
+Human Decisions
+
+The developer decided:
+
+The challenge should progress sequentially.
+Students should not be able to skip ahead freely.
+Completing a day should unlock the next day.
+The experience should feel like a real journey rather than a static checklist.
+Completed Progress
+
+The application now behaves like a real 60-day challenge instead of a static mockup.
+
+The journey system became the foundation for:
+
+Daily missions
+Progress tracking
+Streak tracking
+Achievements
+Dashboard state
+Proof submissions
+
