@@ -12,7 +12,7 @@ Instead of only consuming tutorials, participants complete daily missions, build
 
 ## 🚀 Live Demo
 
-https://abtalks-proof-ihx6.vercel.app/
+[https://abtalks-proof-xeyx.vercel.app/](https://abtalks-proof-xeyx.vercel.app/)
 
 ## ✨ Features
 
